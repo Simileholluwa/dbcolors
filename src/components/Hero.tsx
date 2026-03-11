@@ -1,0 +1,206 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+
+const Hero = () => {
+  return (
+    <section className="relative min-h-screen bg-secondary w-full flex flex-col lg:flex-row overflow-hidden lg:items-center">
+      {/* Background Image: Contained to hero portion on mobile */}
+      <div className="absolute top-0 left-0 w-full h-[100dvh] lg:h-full z-0 overflow-hidden">
+        <Image
+          src="/hero.png"
+          alt="Premium Interior Design"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10 lg:pt-0 min-h-[100dvh] lg:h-full flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 w-full gap-12 items-center">
+          {/* Left Segment: Headline & Text */}
+          <div className="flex flex-col justify-center h-[100dvh] lg:h-auto lg:pt-0">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-4 md:mb-8"
+            >
+              Transform Your <br />
+              <span className="text-primary">Space</span>, Transform
+              <br />
+              Your Life
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-lg md:text-xl text-white/80 max-w-xl mb-6 md:mb-8 lg:mb-12 leading-relaxed"
+            >
+              Elevate your living and working environments with bespoke interior designs
+              that combine luxury, functionality, and timeless elegance.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 lg:mb-0 items-start justify-start"
+            >
+              <motion.button
+                whileHover="hover"
+                whileTap="tap"
+                className="group relative px-6 py-2 md:px-10 md:py-4 rounded-full border border-primary/50 backdrop-blur-md overflow-hidden flex items-center gap-3 md:gap-4 transition-all duration-500"
+              >
+                {/* Magnetic Hover Fill Effect */}
+                <motion.div
+                  variants={{
+                    hover: { scale: 1.5, opacity: 1 }
+                  }}
+                  initial={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+                  className="absolute inset-0 bg-primary z-0 pointer-events-none rounded-full"
+                />
+
+                <span className="relative z-10 text-white group-hover:text-secondary font-bold text-base md:text-lg tracking-wide transition-colors duration-300">
+                  Schedule a Consultation
+                </span>
+              </motion.button>
+            </motion.div>
+          </div>
+
+          {/* Right Segment: Intuitive Bento Journey Layout */}
+          <div className="relative w-full lg:h-full flex flex-col justify-center items-center lg:items-end pb-15 lg:pb-0">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="grid grid-cols-2 lg:grid-cols-2 gap-4 w-full max-w-lg px-4 md:px-0"
+            >
+              {/* Foundation Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex flex-col justify-between"
+              >
+                <span className="text-xs text-primary uppercase tracking-widest font-bold">ESTABLISHED</span>
+                <div className="mt-4">
+                  <span className="text-3xl font-black text-white block">2016</span>
+
+                </div>
+              </motion.div>
+
+              {/* Satisfaction Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex flex-col justify-between"
+              >
+                <span className="text-xs text-primary uppercase tracking-widest font-bold">CUSTOMER SATISFACTION</span>
+                <div className="mt-4">
+                  <span className="text-3xl font-black text-white block">98%</span>
+                </div>
+              </motion.div>
+
+              {/* Projects Card - Large */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="col-span-2 p-8 rounded-3xl bg-secondary/50 border border-primary/20 backdrop-blur-xl group hover:border-primary/50 transition-colors duration-500 overflow-hidden relative"
+              >
+                <div className="relative z-10">
+                  <span className="text-sm text-primary uppercase tracking-[0.3em] font-bold mb-3 block">completed premium projects</span>
+                  <div className="flex items-baseline gap-4">
+                    <span className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">120+</span>
+                  </div>
+                </div>
+                {/* Decorative architectural grid in background */}
+                <div className="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:20px_20px] opacity-50" />
+              </motion.div>
+
+              {/* Materials Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="col-span-2 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex items-center justify-between"
+              >
+                <div>
+                  <span className="text-4xl font-black text-white block">350+</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] text-primary/80 uppercase tracking-[0.2em] font-bold block">Premium Materials</span>
+                  <span className="text-[10px] text-white/30 uppercase tracking-[0.2em] block mt-1">Sourced Globally</span>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Optimized Checkered Box Glass Effect: Contained to hero portion on mobile */}
+      <div
+        className="absolute top-0 left-0 w-full h-[100dvh] lg:h-full z-[5] pointer-events-none overflow-hidden grid grid-cols-6 lg:grid-cols-10 grid-rows-8"
+        style={{ willChange: "transform" }}
+      >
+        {[...Array(80)].map((_, i) => {
+          const cols = 10;
+          const col = i % cols;
+          const factor = col / cols;
+
+          return (
+            <div
+              key={i}
+              className="border-r border-b border-white/10 relative overflow-hidden"
+              style={{
+                backgroundColor: `rgba(20, 50, 20, 0.4)`,
+                backdropFilter: `blur(2px)`,
+              }}
+            >
+              <div className="absolute inset-0 bg-white/[0.01]" />
+
+              {/* Performance-friendly Energy Lines */}
+              {i % 8 === 0 && (
+                <motion.div
+                  className="absolute top-0 left-0 w-full h-[1.2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+                  animate={{ translateX: ["-100%", "100%"] }}
+                  transition={{
+                    duration: 4 + (i % 3),
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: i * 0.2
+                  }}
+                />
+              )}
+              {i % 12 === 0 && (
+                <motion.div
+                  className="absolute top-0 right-0 w-[1.2px] h-full bg-gradient-to-b from-transparent via-primary/50 to-transparent"
+                  animate={{ translateY: ["-100%", "100%"] }}
+                  transition={{
+                    duration: 5 + (i % 4),
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: i * 0.3
+                  }}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
