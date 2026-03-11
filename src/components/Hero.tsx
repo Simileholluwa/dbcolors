@@ -6,18 +6,8 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen bg-secondary w-full flex flex-col lg:flex-row overflow-hidden lg:items-center">
-      {/* Background Image: Contained to hero portion on mobile */}
-      <div className="absolute top-0 left-0 w-full h-[100dvh] lg:h-full z-0 overflow-hidden">
-        <Image
-          src="/hero.png"
-          alt="Premium Interior Design"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+    <section className="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden lg:items-center bg-transparent">
+      {/* Background elements moved to layout.tsx for global availability */}
 
       <div className="container mx-auto px-6 relative z-10 lg:pt-0 min-h-[100dvh] lg:h-full flex flex-col lg:flex-row items-center">
         <div className="flex flex-col lg:grid lg:grid-cols-2 w-full gap-12 items-center">
@@ -87,7 +77,7 @@ const Hero = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex flex-col justify-between"
+                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm flex flex-col justify-between"
               >
                 <span className="text-xs text-primary uppercase tracking-widest font-bold">ESTABLISHED</span>
                 <div className="mt-4">
@@ -102,7 +92,7 @@ const Hero = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex flex-col justify-between"
+                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm flex flex-col justify-between"
               >
                 <span className="text-xs text-primary uppercase tracking-widest font-bold">CUSTOMER SATISFACTION</span>
                 <div className="mt-4">
@@ -116,7 +106,7 @@ const Hero = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="col-span-2 p-8 rounded-3xl bg-secondary/50 border border-primary/20 backdrop-blur-xl group hover:border-primary/50 transition-colors duration-500 overflow-hidden relative"
+                className="col-span-2 p-8 rounded-3xl bg-secondary/50 border border-primary/20 backdrop-blur-md group hover:border-primary/50 transition-colors duration-500 overflow-hidden relative"
               >
                 <div className="relative z-10">
                   <span className="text-sm text-primary uppercase tracking-[0.3em] font-bold mb-3 block">completed premium projects</span>
@@ -134,7 +124,7 @@ const Hero = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="col-span-2 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex items-center justify-between"
+                className="col-span-2 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm flex items-center justify-between"
               >
                 <div>
                   <span className="text-4xl font-black text-white block">350+</span>
