@@ -4,7 +4,7 @@
   --font-raleway: var(--font-raleway);
 
   --color-primary: #99FF00;
-  --color-secondary: #1A1A1A;
+  --color-secondary: #000000;
   --color-accent: #FFFFFF;
 
   --color-background: var(--background);
@@ -12,8 +12,8 @@
 }
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #1A1A1A;
+  --background: #000000;
+  --foreground: #FFFFFF;
   --font-raleway: "Raleway", sans-serif;
 }
 
@@ -23,4 +23,8 @@ body {
   font-family: var(--font-raleway);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[id] {
+  scroll-margin-top: 100px;
 }

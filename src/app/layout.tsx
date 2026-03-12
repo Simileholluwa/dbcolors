@@ -23,18 +23,6 @@ export default function RootLayout({
       <body
         className={`${raleway.variable} antialiased font-raleway bg-secondary text-white relative`}
       >
-        {/* Persistent Global Background */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-          <Image
-            src="/hero.png"
-            alt="Premium Interior Design Background"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-secondary/85 backdrop-blur-[2px]" />
-        </div>
-
         <main className="relative z-10">
           {children}
         </main>

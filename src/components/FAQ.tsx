@@ -32,30 +32,55 @@ const FAQ = () => {
 
   // Mapping specific col-spans for a balanced bento look
   const colSpans = [
-    "md:col-span-3", // Process
-    "md:col-span-3", // Services
-    "md:col-span-4", // Timelines
-    "md:col-span-2", // Customization
-    "md:col-span-6", // Consultations
+    "md:col-span-1 lg:col-span-3",
+    "md:col-span-1 lg:col-span-3",
+    "md:col-span-1 lg:col-span-4",
+    "md:col-span-1 lg:col-span-2",
+    "md:col-span-2 lg:col-span-6",
   ];
 
   return (
-    <section className="py-24 bg-transparent relative z-10" id="faq">
+    <section className="py-16 md:py-24 bg-transparent relative z-10" id="faq">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-4">
-          <div className="max-w-xl">
+        <div className="flex flex-col items-center text-center mb-8">
+          <div className="mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-none"
+              className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight"
             >
-              Frequently Asked <span className="text-primary">Questions</span>
+              Frequently Asked <span className="text-primary italic">Questions</span>
             </motion.h2>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center justify-center gap-4 mt-4 mx-auto"
+            >
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: "150px" }}
+                transition={{ duration: 1, ease: "circOut" }}
+                className="h-[1px] bg-gradient-to-r from-transparent to-white/20"
+              />
+              <motion.div
+                initial={{ scale: 0, rotate: 45 }}
+                whileInView={{ scale: 1, rotate: 45 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="w-2 h-2 bg-primary shadow-[0_0_15px_rgba(153,255,0,0.5)]"
+              />
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: "150px" }}
+                transition={{ duration: 1, ease: "circOut" }}
+                className="h-[1px] bg-gradient-to-l from-transparent to-white/20"
+              />
+            </motion.div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -66,7 +91,7 @@ const FAQ = () => {
               className={`${colSpans[index]} relative group`}
             >
               <div
-                className={`h-full border transition-all duration-500 rounded-[2rem] overflow-hidden flex flex-col
+                className={`h-full border transition-all duration-500 rounded-[1.5rem] overflow-hidden flex flex-col
                   ${activeIndex === index
                     ? "bg-secondary/40 border-primary/30 shadow-[0_0_30px_rgba(153,255,0,0.1)]"
                     : "bg-white/[0.03] border-white/10 backdrop-blur-sm hover:border-white/20"
@@ -78,7 +103,7 @@ const FAQ = () => {
                 >
                   <div className="flex items-start justify-between w-full gap-4">
                     <span className={`text-xl md:text-2xl font-black tracking-tight leading-tight transition-colors duration-300
-                      ${activeIndex === index ? "text-primary" : "text-white group-hover:text-primary/80"}`}
+                      ${activeIndex === index ? "text-primary" : "text-white group-hover:text-primary"}`}
                     >
                       {faq.question}
                     </span>
@@ -96,7 +121,7 @@ const FAQ = () => {
                         exit={{ height: 0, opacity: 0, marginTop: 0 }}
                         transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
                       >
-                        <p className="text-white text-base md:text-lg leading-relaxed font-medium">
+                        <p className="text-white/60 text-base md:text-lg leading-relaxed font-medium">
                           {faq.answer}
                         </p>
                       </motion.div>
