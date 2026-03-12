@@ -30,19 +30,11 @@ const faqs = [
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // Mapping specific col-spans for a balanced bento look
-  const colSpans = [
-    "md:col-span-1 lg:col-span-3",
-    "md:col-span-1 lg:col-span-3",
-    "md:col-span-1 lg:col-span-4",
-    "md:col-span-1 lg:col-span-2",
-    "md:col-span-2 lg:col-span-6",
-  ];
-
   return (
     <section className="py-16 md:py-24 bg-transparent relative z-10" id="faq">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center mb-8">
+          {/* ... existing header logic ... */}
           <div className="mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -80,7 +72,7 @@ const FAQ = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 gap-4">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -88,7 +80,7 @@ const FAQ = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`${colSpans[index]} relative group`}
+              className="relative group"
             >
               <div
                 className={`h-full border transition-all duration-500 rounded-[1.5rem] overflow-hidden flex flex-col

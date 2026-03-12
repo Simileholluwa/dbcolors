@@ -156,7 +156,7 @@ const Packages = () => {
                 </div>
 
                 {/* BACK FACE */}
-                <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] h-full bg-secondary border border-primary/30 rounded-[1.5rem] overflow-hidden p-4 flex flex-col shadow-[0_0_50px_rgba(153,255,0,0.1)]">
+                <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] h-full bg-white/[0.03] border border-primary/30 rounded-[1.5rem] backdrop-blur-md overflow-hidden p-4 flex flex-col shadow-[0_0_50px_rgba(153,255,0,0.1)]">
                   <div className="flex justify-between items-start mb-6">
                     <div>
                       <span className="text-primary font-black uppercase tracking-[0.3em] text-[8px] mb-1 block">Specifications</span>

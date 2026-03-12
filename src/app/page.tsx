@@ -5,6 +5,7 @@ import Packages from "@/components/Packages";
 import AboutUs from "@/components/AboutUs";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       {/* <AboutUs />
       <Testimonials /> */}
       <FAQ />
+      <CTA />
       <Footer />
     </main>
   );

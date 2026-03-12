@@ -3,6 +3,8 @@ import { Raleway } from "next/font/google";
 import Image from "next/image";
 import "./globals.css";
 
+import DraftingCanvas from "@/components/DraftingCanvas";
+
 const raleway = Raleway({
   variable: "--font-raleway",
   subsets: ["latin"],
@@ -23,6 +25,7 @@ export default function RootLayout({
       <body
         className={`${raleway.variable} antialiased font-raleway bg-secondary text-white relative`}
       >
+        <DraftingCanvas />
         <main className="relative z-10">
           {children}
         </main>

@@ -32,8 +32,8 @@ const Navbar = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Track Hero, Packages, FAQ, and Footer
-    ["hero", "packages", "faq", "footer"].forEach((id) => {
+    // Track Hero, Packages, FAQ, CTA, and Footer
+    ["hero", "packages", "faq", "cta", "footer"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -59,7 +59,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${isScrolled ? "bg-black/80 backdrop-blur-lg" : "bg-black"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent backdrop-blur-none"
         }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between relative">

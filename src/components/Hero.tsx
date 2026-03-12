@@ -7,8 +7,6 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <section className="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden lg:items-center bg-transparent" id="hero">
-      {/* Background elements moved to layout.tsx for global availability */}
-
       <div className="container mx-auto px-6 relative z-10 lg:pt-0 flex flex-col lg:flex-row items-center">
         <div className="flex flex-col lg:grid lg:grid-cols-2 w-full gap-8 md:gap-12 items-center">
           {/* Left Segment: Headline & Text */}
