@@ -30,54 +30,84 @@ const faqs = [
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  // Mapping specific col-spans for a balanced bento look
+  const colSpans = [
+    "md:col-span-3", // Process
+    "md:col-span-3", // Services
+    "md:col-span-4", // Timelines
+    "md:col-span-2", // Customization
+    "md:col-span-6", // Consultations
+  ];
+
   return (
-    <section className="py-24 bg-white" id="faq">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
-          >
-            Frequently Asked <span className="text-secondary italic">Questions</span>
-          </motion.h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+    <section className="py-24 bg-transparent relative z-10" id="faq">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-4">
+          <div className="max-w-xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-none"
+            >
+              Frequently Asked <span className="text-primary">Questions</span>
+            </motion.h2>
+          </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className="border border-zinc-100 rounded-3xl overflow-hidden hover:border-primary/30 transition-colors"
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`${colSpans[index]} relative group`}
             >
-              <button
-                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-6 md:p-8 text-left bg-zinc-50/50 hover:bg-zinc-50 transition-colors"
+              <div
+                className={`h-full border transition-all duration-500 rounded-[2rem] overflow-hidden flex flex-col
+                  ${activeIndex === index
+                    ? "bg-secondary/40 border-primary/30 shadow-[0_0_30px_rgba(153,255,0,0.1)]"
+                    : "bg-white/[0.03] border-white/10 backdrop-blur-sm hover:border-white/20"
+                  }`}
               >
-                <span className="text-lg md:text-xl font-bold text-secondary">
-                  {faq.question}
-                </span>
-                <div className={`p-2 rounded-full transition-all ${activeIndex === index ? "bg-primary text-secondary" : "bg-white text-secondary/40"}`}>
-                  {activeIndex === index ? <Minus size={18} /> : <Plus size={18} />}
-                </div>
-              </button>
-              
-              <AnimatePresence>
-                {activeIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <div className="p-6 md:p-8 pt-0 text-secondary/60 leading-relaxed border-t border-zinc-100/50">
-                      {faq.answer}
+                <button
+                  onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                  className="w-full h-full flex flex-col p-8 text-left transition-colors relative z-10"
+                >
+                  <div className="flex items-start justify-between w-full gap-4">
+                    <span className={`text-xl md:text-2xl font-black tracking-tight leading-tight transition-colors duration-300
+                      ${activeIndex === index ? "text-primary" : "text-white group-hover:text-primary/80"}`}
+                    >
+                      {faq.question}
+                    </span>
+                    <div className={`shrink-0 p-3 rounded-2xl transition-all duration-500 
+                      ${activeIndex === index ? "bg-primary text-secondary rotate-180" : "bg-white/5 text-white/40 group-hover:text-white"}`}>
+                      {activeIndex === index ? <Minus size={20} strokeWidth={3} /> : <Plus size={20} strokeWidth={3} />}
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                  </div>
+
+                  <AnimatePresence>
+                    {activeIndex === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                        animate={{ height: "auto", opacity: 1, marginTop: 24 }}
+                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                        transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+                      >
+                        <p className="text-white text-base md:text-lg leading-relaxed font-medium">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+
+                {/* Decorative architectural grid element for hover */}
+                <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

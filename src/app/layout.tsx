@@ -32,7 +32,7 @@ export default function RootLayout({
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-secondary/70" />
+          <div className="absolute inset-0 bg-secondary/85 backdrop-blur-[2px]" />
         </div>
 
         <main className="relative z-10">

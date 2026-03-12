@@ -17,7 +17,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-4 md:mb-8"
+              className="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-4 md:mb-8"
             >
               Transform Your <br />
               <span className="text-primary">Space</span>, Transform
@@ -29,7 +29,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-xl text-white/80 max-w-xl mb-6 md:mb-8 lg:mb-12 leading-relaxed"
+              className="text-lg md:text-xl text-white/70 max-w-xl mb-6 md:mb-8 lg:mb-12 leading-relaxed font-medium"
             >
               Elevate your living and working environments with bespoke interior designs
               that combine luxury, functionality, and timeless elegance.
@@ -69,7 +69,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-2 lg:grid-cols-2 gap-4 w-full max-w-lg px-4 md:px-0"
+              className="grid grid-cols-2 lg:grid-cols-2 gap-4 w-full lg:max-w-lg"
             >
               {/* Foundation Card */}
               <motion.div
@@ -137,57 +137,6 @@ const Hero = () => {
             </motion.div>
           </div>
         </div>
-      </div>
-
-      {/* Optimized Checkered Box Glass Effect: Contained to hero portion on mobile */}
-      <div
-        className="absolute top-0 left-0 w-full h-[100dvh] lg:h-full z-[5] pointer-events-none overflow-hidden grid grid-cols-6 lg:grid-cols-10 grid-rows-8"
-        style={{ willChange: "transform" }}
-      >
-        {[...Array(80)].map((_, i) => {
-          const cols = 10;
-          const col = i % cols;
-          const factor = col / cols;
-
-          return (
-            <div
-              key={i}
-              className="border-r border-b border-white/10 relative overflow-hidden"
-              style={{
-                backgroundColor: `rgba(20, 50, 20, 0.4)`,
-                backdropFilter: `blur(2px)`,
-              }}
-            >
-              <div className="absolute inset-0 bg-white/[0.01]" />
-
-              {/* Performance-friendly Energy Lines */}
-              {i % 8 === 0 && (
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-[1.2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"
-                  animate={{ translateX: ["-100%", "100%"] }}
-                  transition={{
-                    duration: 4 + (i % 3),
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: i * 0.2
-                  }}
-                />
-              )}
-              {i % 12 === 0 && (
-                <motion.div
-                  className="absolute top-0 right-0 w-[1.2px] h-full bg-gradient-to-b from-transparent via-primary/50 to-transparent"
-                  animate={{ translateY: ["-100%", "100%"] }}
-                  transition={{
-                    duration: 5 + (i % 4),
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: i * 0.3
-                  }}
-                />
-              )}
-            </div>
-          );
-        })}
       </div>
     </section>
   );

@@ -54,9 +54,9 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-8 italic">Newsletter</h4>
             <p className="text-white/40 mb-6 text-sm">Subscribe to receive the latest design tips and project updates.</p>
             <div className="relative">
-              <input 
-                type="email" 
-                placeholder="Your email" 
+              <input
+                type="email"
+                placeholder="Your email"
                 className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-primary transition-colors"
               />
               <button className="absolute right-2 top-2 bottom-2 bg-primary text-secondary p-3 rounded-xl hover:brightness-110 transition-all">
@@ -77,7 +77,7 @@ const Footer = () => {
 
       {/* Large background decorative text */}
       <div className="absolute bottom-0 right-0 translate-y-1/3 text-[20vw] font-black text-white/[0.02] pointer-events-none leading-none select-none">
-        EXCELLENCE
+        dbcolors.ng
       </div>
     </footer>
   );
