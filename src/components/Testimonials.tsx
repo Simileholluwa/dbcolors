@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
     name: "Sarah Johnson",
     role: "Homeowner, Lagos",
-    text: "Working with dbcolors.ng was a dream. They transformed my outdated living room into a modern sanctuary that I proud to call home.",
+    text: "Working with dbcolors.ng was a dream. They transformed my outdated living room into a modern sanctuary that I'm proud to call home.",
     rating: 5,
   },
   {
@@ -23,73 +23,144 @@ const testimonials = [
     text: "Attention to detail and excellence in execution. They really listened to our needs and delivered beyond our expectations.",
     rating: 5,
   },
+  {
+    name: "David Okoro",
+    role: "Real Estate Developer",
+    text: "Their ability to translate complex architectural requirements into stunning interior realities is unmatched in the industry.",
+    rating: 5,
+  },
+  {
+    name: "Elena Rodriguez",
+    role: "Modernist Architect",
+    text: "dbcolors understands the relationship between light, space, and texture. A true partner for high-end residential projects.",
+    rating: 5,
+  },
 ];
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const next = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  const prev = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  // Auto-switch testimonials with interaction reset
+  useEffect(() => {
+    if (isHovered) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex, isHovered]); // Reset interval whenever index changes or hover state changes
+
+  const handleManualSwitch = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   return (
-    <section className="py-24 bg-zinc-50 overflow-hidden" id="testimonials">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
-          >
-            Client <span className="text-secondary italic">Feedback</span>
-          </motion.h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
-        </div>
-
-        <div className="relative max-w-4xl mx-auto">
-          <div className="absolute top-0 left-0 -translate-x-12 -translate-y-12 text-zinc-200 z-0">
-            <Quote size={120} />
+    <section className="py-16 md:py-24 bg-transparent relative overflow-hidden" id="testimonials">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Standardized Header */}
+          <div className="mb-8 flex flex-col items-center text-center">
+            <div className="mx-auto">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight"
+              >
+                The Echo <span className="text-primary italic">Chamber</span>
+              </motion.h2>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="flex items-center justify-center gap-4 mt-4 mx-auto"
+              >
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "150px" }}
+                  transition={{ duration: 1, ease: "circOut" }}
+                  className="h-[1px] bg-gradient-to-r from-transparent to-white/20"
+                />
+                <motion.div
+                  initial={{ scale: 0, rotate: 45 }}
+                  whileInView={{ scale: 1, rotate: 45 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="w-2 h-2 bg-primary shadow-[0_0_15px_rgba(153,255,0,0.5)]"
+                />
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "150px" }}
+                  transition={{ duration: 1, ease: "circOut" }}
+                  className="h-[1px] bg-gradient-to-l from-transparent to-white/20"
+                />
+              </motion.div>
+            </div>
           </div>
 
-          <div className="relative z-10 bg-white border border-zinc-100 p-10 md:p-16 rounded-[3rem] shadow-xl">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="flex flex-col items-center text-center"
-              >
-                <div className="flex gap-1 mb-6 text-primary">
-                  {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                    <Star key={i} size={20} fill="currentColor" />
-                  ))}
-                </div>
-                
-                <p className="text-xl md:text-2xl text-secondary/80 leading-relaxed italic mb-10">
-                  "{testimonials[currentIndex].text}"
-                </p>
+          <div className="relative">
+            {/* Massive Static Quote Marker */}
+            <div className="absolute -top-20 -left-10 text-white/5 pointer-events-none">
+              <Quote size={280} />
+            </div>
 
-                <div>
-                  <h4 className="text-xl font-bold text-secondary">{testimonials[currentIndex].name}</h4>
-                  <p className="text-secondary/40 font-medium">{testimonials[currentIndex].role}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+            <div
+              className="relative z-10 bg-white/[0.03] backdrop-blur-2xl border border-white/5 rounded-[1.5rem] shadow-2xl overflow-hidden min-h-[420px]"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={currentIndex}
+                  initial={{ x: "100%", opacity: 0, filter: "blur(10px)" }}
+                  animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+                  exit={{ x: "-100%", opacity: 0, filter: "blur(10px)" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0 p-8 md:p-16 flex flex-col justify-center"
+                >
+                  {/* Internal Decorative Gradient */}
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
 
-            <div className="flex justify-center gap-4 mt-12">
-              <button 
-                onClick={prev}
-                className="p-4 rounded-full border border-zinc-200 hover:bg-secondary hover:text-primary transition-all active:scale-90"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button 
-                onClick={next}
-                className="p-4 rounded-full border border-zinc-200 hover:bg-secondary hover:text-primary transition-all active:scale-90"
-              >
-                <ChevronRight size={24} />
-              </button>
+                  <div className="relative z-10">
+                    <div className="flex gap-1 mb-8">
+                      {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                        <Star key={i} size={18} fill="currentColor" className="text-primary" />
+                      ))}
+                    </div>
+
+                    <blockquote className="text-2xl md:text-3xl lg:text-4xl text-white font-medium leading-tight tracking-tight mb-12 max-w-4xl">
+                      "{testimonials[currentIndex].text}"
+                    </blockquote>
+
+                    <div className="flex items-center gap-6 mt-auto">
+                      <div className="w-12 h-1 bg-primary/40 rounded-full" />
+                      <div>
+                        <h4 className="text-xl font-bold text-white tracking-tight">{testimonials[currentIndex].name}</h4>
+                        <p className="text-white/40 font-mono text-xs uppercase tracking-widest">{testimonials[currentIndex].role}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Architectural Footer Accent & Progress */}
+            <div className="absolute -bottom-16 right-0 left-0 flex flex-col items-center gap-6">
+              <div className="flex gap-4">
+                {testimonials.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleManualSwitch(i)}
+                    className={`h-1 transition-all duration-700 rounded-full ${i === currentIndex ? "w-16 bg-primary" : "w-3 bg-white/10 hover:bg-white/20"}`}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-1 items-center opacity-20">
+                <div className="w-12 h-px bg-white" />
+                <span className="text-[10px] text-white font-mono tracking-widest uppercase italic font-bold">The Collective</span>
+                <div className="w-12 h-px bg-white" />
+              </div>
             </div>
           </div>
         </div>

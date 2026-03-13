@@ -12,14 +12,15 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Packages", href: "packages" },
+    { name: "Testimonials", href: "testimonials" },
     { name: "FAQs", href: "faq" },
   ];
 
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-40% 0px -40% 0px",
-      threshold: 0,
+      rootMargin: "-30% 0px -30% 0px",
+      threshold: 0.1,
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -33,7 +34,7 @@ const Navbar = () => {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Track Hero, Packages, FAQ, CTA, and Footer
-    ["hero", "packages", "faq", "cta", "footer"].forEach((id) => {
+    ["hero", "packages", "testimonials", "faq", "cta", "footer"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });

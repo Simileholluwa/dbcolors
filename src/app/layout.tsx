@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Raleway } from "next/font/google";
 import Image from "next/image";
 import "./globals.css";
@@ -13,6 +13,17 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   title: "dbcolors.ng | Premium Interior Design",
   description: "Excellence in interior design for homes and offices.",
+  appleWebApp: {
+    title: "dbcolors.ng",
+    statusBarStyle: "black",
+    capable: true,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
