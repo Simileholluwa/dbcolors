@@ -70,7 +70,7 @@ const Gallery = () => {
   ];
 
   return (
-    <section className="py-32 bg-transparent relative z-10" id="gallery">
+    <section className="py-16 md:py-24 bg-transparent relative z-10" id="gallery">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-12">
           <div className="max-w-3xl">

@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden lg:items-center bg-transparent" id="hero">
-      <div className="container mx-auto px-6 relative z-10 lg:pt-0 flex flex-col lg:flex-row items-center">
+    <section className="relative lg:min-h-screen w-full flex flex-col lg:flex-row overflow-hidden lg:items-center bg-transparent pt-32 pb-16 md:pt-40 md:pb-24" id="hero">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center">
         <div className="flex flex-col lg:grid lg:grid-cols-2 w-full gap-8 md:gap-12 items-center">
           {/* Left Segment: Headline & Text */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left justify-center pt-32 pb-12 lg:py-0 lg:h-auto">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left justify-center lg:h-auto mb-8 lg:mb-0">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-4 md:mb-8"
+              className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight mb-4 md:mb-8"
             >
               Transform Your <br />
               <span className="text-primary italic text-primary">Space</span>, Transform
@@ -65,7 +65,7 @@ const Hero = () => {
           </div>
 
           {/* Right Segment: Intuitive Bento Journey Layout */}
-          <div className="relative w-full lg:h-full flex flex-col justify-center items-center lg:items-end pb-12 md:pb-24 lg:pb-0">
+          <div className="relative w-full lg:h-full flex flex-col justify-center items-center lg:items-end lg:pb-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

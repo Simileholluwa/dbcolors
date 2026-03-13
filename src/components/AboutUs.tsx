@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 const AboutUs = () => {
   return (
-    <section className="py-24 bg-white overflow-hidden" id="about">
+    <section className="py-16 md:py-24 bg-white overflow-hidden" id="about">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Text Content */}

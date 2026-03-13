@@ -31,7 +31,7 @@ const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-16 md:py-24 bg-transparent relative z-10" id="faq">
+    <section className="pb-16 pt-30 md:pb-24 md:pt-38 bg-transparent relative z-10" id="faq">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center mb-8">
           {/* ... existing header logic ... */}
