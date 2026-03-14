@@ -11,6 +11,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
 
   const navLinks = [
+    { name: "About", href: "about" },
     { name: "Packages", href: "packages" },
     { name: "Testimonials", href: "testimonials" },
     { name: "FAQs", href: "faq" },
@@ -33,8 +34,8 @@ const Navbar = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Track Hero, Packages, FAQ, CTA, and Footer
-    ["hero", "packages", "testimonials", "faq", "cta", "footer"].forEach((id) => {
+    // Track Hero, About, Packages, Testimonials, FAQ, CTA, and Footer
+    ["hero", "about", "packages", "testimonials", "faq", "cta", "footer"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -92,8 +93,10 @@ const Navbar = () => {
 
         {/* CTA - Right */}
         <div className="flex items-center gap-4 relative z-10">
-          <button className="hidden md:block bg-primary text-secondary px-6 py-2.5 rounded-xl text-sm font-bold hover:brightness-110 active:scale-95 transition-all">
-            Schedule a Consultation
+          <button className="hidden md:block bg-primary text-secondary px-6 py-2.5 rounded-xl text-sm font-bold hover:brightness-110 active:scale-95 transition-all"
+            onClick={() => scrollToSection("packages")}
+          >
+            View Packages
           </button>
           <button
             className="md:hidden text-white p-2"

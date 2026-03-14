@@ -2,8 +2,45 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, CalendarCheck } from "lucide-react";
 
 const Hero = () => {
+  const [selectedDay, setSelectedDay] = React.useState<number | null>(null);
+  const [currentMonthIndex, setCurrentMonthIndex] = React.useState(0);
+
+  const monthData = [
+    {
+      name: "MARCH",
+      year: "2026",
+      days: Array.from({ length: 31 }, (_, i) => i + 1),
+      availableDays: [12, 14, 15, 19, 21, 22, 26, 28]
+    },
+    {
+      name: "APRIL",
+      year: "2026",
+      days: Array.from({ length: 30 }, (_, i) => i + 1),
+      availableDays: [2, 5, 8, 12, 18, 20, 25, 29]
+    },
+    {
+      name: "MAY",
+      year: "2026",
+      days: Array.from({ length: 31 }, (_, i) => i + 1),
+      availableDays: [1, 4, 10, 15, 22, 24, 27, 30]
+    }
+  ];
+
+  const currentMonth = monthData[currentMonthIndex];
+
+  const handleNextMonth = () => {
+    setCurrentMonthIndex((prev) => (prev + 1) % monthData.length);
+    setSelectedDay(null);
+  };
+
+  const handlePrevMonth = () => {
+    setCurrentMonthIndex((prev) => (prev - 1 + monthData.length) % monthData.length);
+    setSelectedDay(null);
+  };
+
   return (
     <section className="relative lg:min-h-screen w-full flex flex-col lg:flex-row overflow-hidden lg:items-center bg-transparent pt-32 pb-16 md:pt-40 md:pb-24" id="hero">
       <div className="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center">
@@ -14,7 +51,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight mb-4 md:mb-8"
+              className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-4 md:mb-8"
             >
               Transform Your <br />
               <span className="text-primary italic text-primary">Space</span>, Transform
@@ -47,7 +84,6 @@ const Hero = () => {
                 whileTap="tap"
                 className="group relative px-6 py-2 md:px-10 md:py-4 rounded-full border border-primary/50 backdrop-blur-md overflow-hidden flex items-center gap-3 md:gap-4 transition-all duration-500"
               >
-                {/* Magnetic Hover Fill Effect */}
                 <motion.div
                   variants={{
                     hover: { scale: 1.5, opacity: 1 }
@@ -56,7 +92,6 @@ const Hero = () => {
                   transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
                   className="absolute inset-0 bg-primary z-0 pointer-events-none rounded-full"
                 />
-
                 <span className="relative z-10 text-white group-hover:text-secondary font-bold text-base md:text-lg tracking-wide transition-colors duration-300">
                   View Packages
                 </span>
@@ -64,76 +99,111 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right Segment: Intuitive Bento Journey Layout */}
+          {/* Right Segment: Interactive Consultation Calendar */}
           <div className="relative w-full lg:h-full flex flex-col justify-center items-center lg:items-end lg:pb-0">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-2 lg:grid-cols-2 gap-4 w-full lg:max-w-lg"
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="w-full max-w-md bg-white/[0.03] backdrop-blur-3xl border border-white/5 rounded-[1.5rem] overflow-hidden shadow-2xl relative group"
             >
-              {/* Foundation Card */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm flex flex-col justify-between"
-              >
-                <span className="text-xs text-primary uppercase tracking-widest font-bold">ESTABLISHED</span>
-                <div className="mt-4">
-                  <span className="text-3xl font-black text-white block">2016</span>
-                </div>
-              </motion.div>
+              {/* Internal Glow */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
 
-              {/* Satisfaction Card */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="col-span-1 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm flex flex-col justify-between"
-              >
-                <span className="text-xs text-primary uppercase tracking-widest font-bold">CUSTOMER SATISFACTION</span>
-                <div className="mt-4">
-                  <span className="text-3xl font-black text-white block">98%</span>
-                </div>
-              </motion.div>
-
-              {/* Projects Card - Large */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="col-span-2 p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-md group hover:border-primary/50 transition-colors duration-500 overflow-hidden relative"
-              >
-                <div className="relative z-10">
-                  <span className="text-sm text-primary uppercase tracking-[0.3em] font-bold mb-3 block">completed premium projects</span>
-                  <div className="flex items-baseline gap-4">
-                    <span className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">120+</span>
+              <div className="px-4 py-8 relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <span className="text-[10px] text-primary font-black tracking-[0.3em] uppercase block mb-1">Schedule</span>
+                    <h3 className="text-2xl font-black text-white tracking-tighter">Consultation</h3>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handlePrevMonth}
+                      className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-secondary transition-all"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+                    <button
+                      onClick={handleNextMonth}
+                      className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-secondary transition-all"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
                   </div>
                 </div>
-                {/* Decorative architectural grid in background */}
-                <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:20px_20px] opacity-50" />
-              </motion.div>
 
-              {/* Materials Card */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="col-span-2 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm flex items-center justify-between"
-              >
-                <div>
-                  <span className="text-4xl font-black text-white block">350+</span>
+                <div className="flex justify-between items-center mb-6 px-2">
+                  <motion.span
+                    key={currentMonth.name}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="text-white font-black tracking-widest text-sm"
+                  >
+                    {currentMonth.name} <span className="text-white/20">{currentMonth.year}</span>
+                  </motion.span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_rgba(153,255,0,0.5)]" />
+                    <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Available Spots</span>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-[10px] text-primary/80 uppercase tracking-[0.2em] font-bold block">Premium Materials</span>
-                  <span className="text-[10px] text-white/30 uppercase tracking-[0.2em] block mt-1 font-black">Sourced Globally</span>
-                </div>
-              </motion.div>
+
+                {/* Calendar Grid */}
+                <motion.div
+                  key={currentMonthIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="grid grid-cols-7 gap-2 mb-8"
+                >
+                  {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
+                    <div key={i} className="text-[10px] font-black text-white/20 text-center py-2 uppercase tracking-widest">{day}</div>
+                  ))}
+                  {currentMonth.days.map((day) => {
+                    const isAvailable = currentMonth.availableDays.includes(day);
+                    const isSelected = selectedDay === day;
+                    return (
+                      <motion.button
+                        key={`${currentMonth.name}-${day}`}
+                        whileHover={isAvailable ? { scale: 1.1 } : {}}
+                        whileTap={isAvailable ? { scale: 0.95 } : {}}
+                        onClick={() => isAvailable && setSelectedDay(day)}
+                        className={`
+                          h-10 rounded-md flex items-center justify-center text-xs font-bold transition-all duration-300 relative
+                          ${isAvailable ? "cursor-pointer" : "opacity-20 cursor-default"}
+                          ${isSelected
+                            ? "bg-primary text-secondary shadow-[0_0_20px_rgba(153,255,0,0.3)]"
+                            : isAvailable
+                              ? "bg-white/5 text-white hover:bg-white/10"
+                              : "text-white/40"
+                          }
+                        `}
+                      >
+                        {day}
+                        {isAvailable && !isSelected && (
+                          <div className="absolute top-1 right-1 w-1 h-1 bg-primary rounded-full" />
+                        )}
+                      </motion.button>
+                    );
+                  })}
+                </motion.div>
+
+                {/* Selection Footer */}
+                <motion.button
+                  animate={selectedDay ? { y: 0, opacity: 1 } : { y: 10, opacity: 0.5 }}
+                  className={`w-full py-4 rounded-2xl font-black text-sm tracking-widest uppercase transition-all duration-500 flex items-center justify-center gap-3
+                    ${selectedDay
+                      ? "bg-primary text-secondary shadow-[0_0_30px_rgba(153,255,0,0.2)] hover:brightness-110"
+                      : "bg-white/5 text-white/20 pointer-events-none"
+                    }
+                  `}
+                >
+                  <CalendarCheck size={18} strokeWidth={3} />
+                  {selectedDay ? `Book ${currentMonth.name} ${selectedDay}` : 'Select a Date'}
+                </motion.button>
+              </div>
+
+              {/* Decorative Scan Line */}
+              <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
             </motion.div>
           </div>
         </div>

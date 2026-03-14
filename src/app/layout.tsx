@@ -37,6 +37,15 @@ export default function RootLayout({
         className={`${raleway.variable} antialiased font-raleway bg-secondary text-white relative`}
       >
         <DraftingCanvas />
+        <div
+          className="fixed inset-0 z-0 pointer-events-none opacity-[0.07] mix-blend-screen"
+          style={{
+            backgroundImage: "url('/bg-house.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
         <main className="relative z-10">
           {children}
         </main>
