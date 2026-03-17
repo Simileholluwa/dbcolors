@@ -134,7 +134,7 @@ const AboutUs = () => {
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative p-8 md:p-12 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl shadow-[0_50px_100px_rgba(0,0,0,0.5)] group"
+                className="relative p-8 md:p-12 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl group"
               >
 
 
@@ -149,14 +149,10 @@ const AboutUs = () => {
                     <span className="text-white font-bold italic"> transcendent architectural spaces</span> that define bespoke luxury.
                   </p>
 
-                  <div className="pt-8 grid grid-cols-3 gap-6 border-t border-white/5">
+                  <div className="pt-8 grid grid-cols-2 gap-6 border-t border-white/5">
                     <div>
                       <span className="block text-[10px] text-primary font-black uppercase tracking-widest mb-1">Experience</span>
                       <span className="text-2xl font-black text-white">10+ yrs</span>
-                    </div>
-                    <div>
-                      <span className="block text-[10px] text-primary font-black uppercase tracking-widest mb-1">Established</span>
-                      <span className="text-2xl font-black text-white">2016</span>
                     </div>
                     <div>
                       <span className="block text-[10px] text-primary font-black uppercase tracking-widest mb-1">Projects</span>

@@ -4,11 +4,14 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const pathname = usePathname();
+  const router = useRouter();
 
   const navLinks = [
     { name: "About", href: "about" },
@@ -20,8 +23,9 @@ const Navbar = () => {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-30% 0px -30% 0px",
-      threshold: 0.1,
+      // Create a 25% thick detection zone near the top of the viewport
+      rootMargin: "-20% 0px -55% 0px",
+      threshold: 0,
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -52,11 +56,19 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+
+    if (pathname !== "/") {
+      router.push(`/#${id}`);
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const navbarHeight = 84; // Adjusted for better precision
+      const top = element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top, behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -120,14 +132,24 @@ const Navbar = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-2xl font-black tracking-tighter text-left transition-colors ${activeSection === link.href ? "text-primary" : "text-white/60"
+                className={`text-2xl font-black tracking-tighter text-left transition-colors relative w-fit ${activeSection === link.href ? "text-primary" : "text-white/60 hover:text-white"
                   }`}
               >
                 {link.name}
+                {activeSection === link.href && (
+                  <motion.div
+                    layoutId="activeNavMobile"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </button>
             ))}
-            <button className="bg-primary text-secondary px-6 py-4 rounded-xl text-lg font-bold mt-2">
-              Schedule a Consultation
+            <button
+              onClick={() => scrollToSection("packages")}
+              className="bg-primary text-secondary px-6 py-4 rounded-xl text-lg font-bold mt-2 hover:brightness-110 active:scale-95 transition-all text-center"
+            >
+              View Packages
             </button>
           </motion.div>
         )}

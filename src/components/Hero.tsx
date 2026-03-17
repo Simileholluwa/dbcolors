@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, CalendarCheck } from "lucide-react";
+import Link from "next/link";
 
 const Hero = () => {
   const [selectedDay, setSelectedDay] = React.useState<number | null>(null);
@@ -188,8 +189,8 @@ const Hero = () => {
                 </motion.div>
 
                 {/* Selection Footer */}
-                <motion.button
-                  animate={selectedDay ? { y: 0, opacity: 1 } : { y: 10, opacity: 0.5 }}
+                <Link 
+                  href="/consultation"
                   className={`w-full py-4 rounded-2xl font-black text-sm tracking-widest uppercase transition-all duration-500 flex items-center justify-center gap-3
                     ${selectedDay
                       ? "bg-primary text-secondary shadow-[0_0_30px_rgba(153,255,0,0.2)] hover:brightness-110"
@@ -199,7 +200,7 @@ const Hero = () => {
                 >
                   <CalendarCheck size={18} strokeWidth={3} />
                   {selectedDay ? `Book ${currentMonth.name} ${selectedDay}` : 'Select a Date'}
-                </motion.button>
+                </Link>
               </div>
 
               {/* Decorative Scan Line */}

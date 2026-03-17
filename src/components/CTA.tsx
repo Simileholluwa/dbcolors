@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const CTA = () => {
   return (
@@ -22,12 +23,14 @@ const CTA = () => {
               Join our elite clientele and experience the perfect blend of architectural precision and bespoke luxury.
             </p>
 
-            <motion.button
-              className="group relative px-6 py-3 md:px-12 md:py-6 rounded-full bg-primary text-secondary font-black text-sm md:text-xl tracking-wide transition-all duration-300 flex items-center gap-2 md:gap-4 mx-auto"
-            >
-              <span>Schedule a Consultation</span>
-              <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={20} strokeWidth={3} />
-            </motion.button>
+            <Link href="/consultation">
+              <motion.button
+                className="group relative px-6 py-3 md:px-12 md:py-6 rounded-full bg-primary text-secondary font-black text-sm md:text-xl tracking-wide transition-all duration-300 flex items-center gap-2 md:gap-4 mx-auto"
+              >
+                <span>Schedule a Consultation</span>
+                <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={20} strokeWidth={3} />
+              </motion.button>
+            </Link>
           </motion.div>
 
           {/* Architectural datum line - Hidden on mobile */}

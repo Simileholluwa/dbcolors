@@ -124,7 +124,7 @@ const Packages = () => {
                 className="relative w-full h-full [transform-style:preserve-3d]"
               >
                 {/* FRONT FACE */}
-                <div className="absolute inset-0 [backface-visibility:hidden] h-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] overflow-hidden backdrop-blur-md group-hover:border-primary/40 transition-colors duration-500 p-4 flex flex-col shadow-2xl">
+                <div className="absolute inset-0 [backface-visibility:hidden] h-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] overflow-hidden backdrop-blur-2xl group-hover:border-primary/40 transition-colors duration-500 p-4 flex flex-col shadow-2xl">
                   <div className="relative w-full h-64 rounded-xl overflow-hidden mb-8">
                     <Image src={pkg.image} alt={pkg.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-secondary/30 group-hover:bg-transparent transition-colors duration-500" />
@@ -156,7 +156,7 @@ const Packages = () => {
                 </div>
 
                 {/* BACK FACE */}
-                <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] h-full bg-white/[0.03] border border-primary/30 rounded-[1.5rem] backdrop-blur-md overflow-hidden p-4 flex flex-col shadow-[0_0_50px_rgba(153,255,0,0.1)]">
+                <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] h-full bg-white/[0.03] border border-primary/30 rounded-[1.5rem] backdrop-blur-2xl overflow-hidden p-4 flex flex-col shadow-[0_0_50px_rgba(153,255,0,0.1)]">
                   <div className="flex justify-between items-start mb-6">
                     <div>
                       <span className="text-primary font-black uppercase tracking-[0.3em] text-[8px] mb-1 block">Specifications</span>
