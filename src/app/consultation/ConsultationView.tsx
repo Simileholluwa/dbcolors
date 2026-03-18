@@ -6,6 +6,7 @@ import { Check, ArrowRight, Video, MapPin, Ruler, Layout, Square, ShoppingBag, F
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SectionHeader from "@/components/SectionHeader";
 
 const consultationPackages = [
   {
@@ -65,55 +66,21 @@ const ConsultationView = () => {
       <section className="pt-32 pb-24 md:pt-48 md:pb-32 relative z-10">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight"
-            >
-              Choose Your <span className="text-primary italic">Consultation</span>
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-center gap-4 my-2 mx-auto"
-            >
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "150px" }}
-                transition={{ duration: 1, ease: "circOut" }}
-                className="h-[1px] bg-gradient-to-r from-transparent to-white/20"
-              />
-              <motion.div
-                initial={{ scale: 0, rotate: 45 }}
-                whileInView={{ scale: 1, rotate: 45 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="w-2 h-2 bg-primary shadow-[0_0_15px_rgba(153,255,0,0.5)]"
-              />
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "150px" }}
-                transition={{ duration: 1, ease: "circOut" }}
-                className="h-[1px] bg-gradient-to-l from-transparent to-white/20"
-              />
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+            <SectionHeader
+              whiteText="Choose Your"
+              highlightText="Consultation"
+            />
+            <p
               className="text-md md:text-lg text-white/50 font-medium leading-relaxed"
             >
               Tailored design expertise to bring your architectural dreams to life. Select the tier that matches your project's scope.
-            </motion.p>
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:items-stretch md:items-center">
             {consultationPackages.map((pkg, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 + 0.2 }}
                 className={`flex flex-col relative group h-full rounded-[1.5rem] border transition-all duration-500 p-8 md:p-10 backdrop-blur-2xl overflow-hidden
                   ${idx === 2 ? "md:col-span-2 lg:col-span-1 md:max-w-md md:w-full md:mx-auto lg:max-w-none lg:mx-0" : ""}
                   ${pkg.highlight
@@ -166,15 +133,12 @@ const ConsultationView = () => {
 
                 {/* Decorative architectural datum line */}
                 <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/20 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Requirements Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="mt-24 md:mt-32 max-w-5xl mx-auto backdrop-blur-2xl border border-white/5 bg-white/[0.05] rounded-[1.5rem] p-8 md:p-16 relative overflow-hidden group"
           >
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -211,19 +175,16 @@ const ConsultationView = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+          <div
             className="mt-20 text-center"
           >
             <Link href="/" className="text-white/30 hover:text-primary transition-colors font-black text-[10px] uppercase tracking-[0.3em] flex items-center justify-center gap-2">
               <span className="rotate-180"><ArrowRight size={12} /></span>
               Back to Home
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 

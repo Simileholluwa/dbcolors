@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import SectionHeader from "./SectionHeader";
 
 const testimonials = [
   {
@@ -61,43 +62,10 @@ const Testimonials = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Standardized Header */}
-          <div className="mb-8 flex flex-col items-center text-center">
-            <div className="mx-auto">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight"
-              >
-                The Echo <span className="text-primary italic">Chamber</span>
-              </motion.h2>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="flex items-center justify-center gap-4 mt-4 mx-auto"
-              >
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "150px" }}
-                  transition={{ duration: 1, ease: "circOut" }}
-                  className="h-[1px] bg-gradient-to-r from-transparent to-white/20"
-                />
-                <motion.div
-                  initial={{ scale: 0, rotate: 45 }}
-                  whileInView={{ scale: 1, rotate: 45 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="w-2 h-2 bg-primary shadow-[0_0_15px_rgba(153,255,0,0.5)]"
-                />
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "150px" }}
-                  transition={{ duration: 1, ease: "circOut" }}
-                  className="h-[1px] bg-gradient-to-l from-transparent to-white/20"
-                />
-              </motion.div>
-            </div>
-          </div>
+          <SectionHeader
+            whiteText="The Echo"
+            highlightText="Chamber"
+          />
 
           <div className="relative">
             {/* Massive Static Quote Marker */}

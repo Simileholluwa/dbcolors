@@ -48,27 +48,21 @@ const Hero = () => {
         <div className="flex flex-col lg:grid lg:grid-cols-2 w-full gap-8 md:gap-12 items-center">
           {/* Left Segment: Headline & Text */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left justify-center lg:h-auto mb-8 lg:mb-0">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+            <h1
               className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-4 md:mb-8"
             >
               Transform Your <br />
               <span className="text-primary italic text-primary">Space</span>, Transform
               <br />
               Your Life
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <p
               className="text-md md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0 mb-4 md:mb-8 lg:mb-12 leading-relaxed font-medium"
             >
               Elevate your living and working environments with bespoke interior designs
               that combine luxury, functionality, and timeless elegance.
-            </motion.p>
+            </p>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -102,10 +96,7 @@ const Hero = () => {
 
           {/* Right Segment: Interactive Consultation Calendar */}
           <div className="relative w-full lg:h-full flex flex-col justify-center items-center lg:items-end lg:pb-0">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6 }}
+            <div
               className="w-full max-w-md bg-white/[0.03] backdrop-blur-3xl border border-white/5 rounded-[1.5rem] overflow-hidden shadow-2xl relative group"
             >
               {/* Internal Glow */}
@@ -149,11 +140,8 @@ const Hero = () => {
                 </div>
 
                 {/* Calendar Grid */}
-                <motion.div
+                <div
                   key={currentMonthIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
                   className="grid grid-cols-7 gap-2 mb-8"
                 >
                   {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
@@ -186,10 +174,10 @@ const Hero = () => {
                       </motion.button>
                     );
                   })}
-                </motion.div>
+                </div>
 
                 {/* Selection Footer */}
-                <Link 
+                <Link
                   href="/consultation"
                   className={`w-full py-4 rounded-2xl font-black text-sm tracking-widest uppercase transition-all duration-500 flex items-center justify-center gap-3
                     ${selectedDay
@@ -205,7 +193,7 @@ const Hero = () => {
 
               {/* Decorative Scan Line */}
               <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
