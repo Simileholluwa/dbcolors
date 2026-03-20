@@ -15,7 +15,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const y = useTransform(scrollYProgress, [0, 1], [0, -30]);
   const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const scale = useTransform(scrollYProgress, [0, 1], [0.98, 1]);
-  
+
   const springOpacity = useSpring(opacity, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const springScale = useSpring(scale, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -26,19 +26,20 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
         opacity: springOpacity,
         scale: springScale,
       }}
-      className={`relative group overflow-hidden rounded-[2rem] border border-white/5 bg-white/[0.02] ${project.span}`}
+      className={`relative group overflow-hidden rounded-[1.5rem] border border-white/5 bg-white/[0.02] ${project.span}`}
     >
       <motion.div style={{ y }} className="absolute inset-0 h-[120%] -top-[10%]">
         <Image
           src={project.image}
           alt={project.name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-1000 group-hover:scale-105"
         />
       </motion.div>
-      
+
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-700" />
-      
+
       <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
         <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
           <span className="text-primary text-[10px] uppercase tracking-[0.3em] font-black mb-2 block opacity-0 group-hover:opacity-100 transition-opacity delay-100">
@@ -48,7 +49,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             {project.name}
           </h3>
         </div>
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 1.1, rotate: 45 }}
           className="bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20 text-white group-hover:bg-primary group-hover:text-secondary group-hover:border-primary transition-all duration-500"
         >
@@ -89,7 +90,7 @@ const Gallery = () => {
           </div>
           <div className="max-w-md">
             <p className="text-white/40 text-base md:text-lg leading-relaxed font-medium">
-              A curated anthology of architectural excellence, where precision 
+              A curated anthology of architectural excellence, where precision
               meets unconventional luxury across residential and workspace frontiers.
             </p>
           </div>

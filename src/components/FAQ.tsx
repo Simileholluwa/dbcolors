@@ -42,6 +42,7 @@ const FAQ = () => {
         <div className="max-w-4xl mx-auto grid grid-cols-1 gap-4">
           {faqs.map((faq, index) => (
             <div
+              key={`faq-${index}`}
               className="relative group"
             >
               <div

@@ -82,7 +82,7 @@ const Packages = () => {
           {packages.map((pkg, index) => (
             <div
               key={pkg.id}
-              className="group h-[580px] [perspective:1500px] cursor-pointer"
+              className="group h-[580px] [perspective:1500px] cursor-pointer md:last:odd:col-span-2 lg:last:odd:col-span-1 md:last:odd:max-w-md md:last:odd:mx-auto md:last:odd:w-full"
               onClick={() => toggleFlip(index)}
             >
               <motion.div
@@ -93,7 +93,7 @@ const Packages = () => {
                 {/* FRONT FACE */}
                 <div className="absolute inset-0 [backface-visibility:hidden] h-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] overflow-hidden backdrop-blur-2xl group-hover:border-primary/40 transition-colors duration-500 p-4 flex flex-col shadow-2xl">
                   <div className="relative w-full h-64 rounded-xl overflow-hidden mb-8">
-                    <Image src={pkg.image} alt={pkg.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+                    <Image src={pkg.image} alt={pkg.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-1000 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-secondary/30 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
 

@@ -29,7 +29,7 @@ const AboutUs = () => {
                 <div
                   className="relative col-span-4 row-span-1 rounded-xl overflow-hidden border border-white/10 group"
                 >
-                  <Image src="/gallery/interior-1.png" alt="Empty Luxury Living Room" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src="/gallery/interior-1.png" alt="Empty Luxury Living Room" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                   <div className="absolute top-4 left-4 z-30 flex flex-col gap-1">
                     <div className="w-6 h-[1px] bg-white/50" />
@@ -41,7 +41,7 @@ const AboutUs = () => {
                 <div
                   className="relative col-span-2 row-span-1 rounded-2xl overflow-hidden border border-white/10 group"
                 >
-                  <Image src="/gallery/interior-2.png" alt="Empty Modern Kitchen" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src="/gallery/interior-2.png" alt="Empty Modern Kitchen" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
 
@@ -49,7 +49,7 @@ const AboutUs = () => {
                 <div
                   className="relative col-span-2 row-span-1 rounded-2xl overflow-hidden border border-white/10 group bg-secondary"
                 >
-                  <Image src="/gallery/interior-3.png" alt="Empty Premium Bedroom" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src="/gallery/interior-3.png" alt="Empty Premium Bedroom" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
 
@@ -57,7 +57,7 @@ const AboutUs = () => {
                 <div
                   className="relative col-span-2 row-span-1 rounded-2xl overflow-hidden border border-white/10 group bg-secondary"
                 >
-                  <Image src="/gallery/interior-4.png" alt="Empty Elegant Dining" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src="/gallery/interior-4.png" alt="Empty Elegant Dining" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
 
@@ -65,7 +65,7 @@ const AboutUs = () => {
                 <div
                   className="relative col-span-2 row-span-1 rounded-2xl overflow-hidden border border-white/10 group bg-secondary"
                 >
-                  <Image src="/gallery/interior-5.png" alt="Empty Modern Office" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src="/gallery/interior-5.png" alt="Empty Modern Office" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500" />
                   <div className="absolute bottom-3 right-3 z-30 opacity-60">
                     <span className="coordinate-marker text-[7px] tracking-[0.2em] md:text-[8px] md:tracking-[0.3em]">FIG. 05</span>
