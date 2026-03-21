@@ -25,7 +25,8 @@ const AssetsStep: React.FC<AssetsStepProps> = ({
   selectedPackage,
 }) => {
   const handleUserChange = (field: string, value: string) => {
-    setAssets((prev: any) => ({ ...prev, [field]: value }));
+    const normalizedValue = field === "email" ? value.toLowerCase() : value;
+    setAssets((prev: any) => ({ ...prev, [field]: normalizedValue }));
   };
 
   const handlePhotoChange = (files: File[]) => {
@@ -95,11 +96,11 @@ const AssetsStep: React.FC<AssetsStepProps> = ({
         onChange={handlePreferencesChange}
       />
 
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+      <div className="flex flex-col gap-4 items-center justify-center">
         <button
           onClick={() => setStep(4)}
           disabled={isContinueDisabled}
-          className="w-full md:w-auto px-12 py-5 bg-primary text-secondary rounded-2xl font-black text-sm tracking-[0.2em] uppercase shadow-[0_0_30px_rgba(153,255,0,0.2)] hover:brightness-110 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full md:w-auto px-12 cursor-pointer py-5 bg-primary text-secondary rounded-2xl font-black text-sm tracking-[0.2em] uppercase shadow-[0_0_30px_rgba(153,255,0,0.2)] hover:brightness-110 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Continue to Schedule
         </button>

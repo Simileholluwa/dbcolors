@@ -1,6 +1,4 @@
-const { toDate } = require("date-fns-tz");
-const { setHours, setMinutes, setSeconds, isWithinInterval, addMinutes } = require("date-fns");
-const { calendar, TIMEZONE, WORKING_HOURS } = require("./config");
+const { isWithinInterval, addMinutes } = require("date-fns");
 
 /**
  * Checks if a day has at least one 30-min slot available

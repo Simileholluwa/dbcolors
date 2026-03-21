@@ -15,8 +15,8 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
   setStep,
 }) => {
   return (
-    <div className="sticky top-20 md:top-24 z-30 flex justify-center w-full px-4">
-      <div className="bg-secondary/50 backdrop-blur-xl border border-white/10 rounded-2xl px-4 pt-4 pb-8 md:px-6 md:pt-6 md:pb-12 shadow-[0_20px_40px_rgba(0,0,0,0.3)] w-full max-w-2xl overflow-x-auto no-scrollbar">
+    <div className="sticky top-20 md:top-24 z-20 flex justify-center w-full px-4">
+      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-4 pt-4 pb-8 md:px-6 md:pt-6 md:pb-12 shadow-[0_20px_40px_rgba(0,0,0,0.3)] w-full max-w-2xl overflow-x-auto no-scrollbar">
         <div className="flex justify-between items-center relative gap-6 md:gap-8 min-w-max md:min-w-[600px] px-2">
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2 z-0" />
           {[1, 2, 3, 4, 5].map((s) => {

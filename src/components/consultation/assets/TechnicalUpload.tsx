@@ -9,7 +9,7 @@ interface TechnicalUploadProps {
 
 const TechnicalUpload: React.FC<TechnicalUploadProps> = ({ drawing, layout, onFileSelect }) => {
   return (
-    <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-8 md:p-10 backdrop-blur-3xl transition-all duration-500">
+    <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-4 md:p-8 backdrop-blur-3xl transition-all duration-500">
       <div className="flex items-center gap-4 mb-8">
         <div className="p-3 bg-white/5 text-white/40 rounded-xl">
           <FileUp size={24} />

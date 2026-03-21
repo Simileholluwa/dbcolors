@@ -10,7 +10,7 @@ const UserInfoFields: React.FC<UserInfoFieldsProps> = ({ name, email, onChange }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
       {/* Name Input */}
-      <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-8 md:p-10 backdrop-blur-3xl relative overflow-hidden group">
+      <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-4 md:p-8 backdrop-blur-3xl relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
         <div className="flex items-center gap-4 mb-6">
           <div className="p-3 bg-primary/20 text-primary rounded-xl">
@@ -33,7 +33,7 @@ const UserInfoFields: React.FC<UserInfoFieldsProps> = ({ name, email, onChange }
       </div>
 
       {/* Email Input */}
-      <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-8 md:p-10 backdrop-blur-3xl relative overflow-hidden group">
+      <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-4 md:p-8 backdrop-blur-3xl relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
         <div className="flex items-center gap-4 mb-6">
           <div className="p-3 bg-primary/20 text-primary rounded-xl">

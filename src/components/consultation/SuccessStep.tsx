@@ -11,10 +11,12 @@ interface SuccessStepProps {
     email: string;
     packageName: string;
   };
+  wasUpdate?: boolean;
 }
 
 const SuccessStep: React.FC<SuccessStepProps> = ({
   bookingData,
+  wasUpdate = false,
 }) => {
   // Helper to generate Google Calendar URL
   const getGoogleCalendarUrl = () => {
@@ -48,7 +50,9 @@ const SuccessStep: React.FC<SuccessStepProps> = ({
 
       <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-4">
         Booking <br />
-        <span className="text-primary italic">Confirmed</span>
+        <span className="text-primary italic">
+          {wasUpdate ? "Updated" : "Confirmed"}
+        </span>
       </h2>
       <p className="text-white/60 text-lg font-medium leading-relaxed mb-6 max-w-md mx-auto italic">
         Thank you! Your {bookingData.packageName} consultation is scheduled for{" "}

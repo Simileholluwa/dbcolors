@@ -155,6 +155,56 @@ export const useConsultationBooking = () => {
     }
   };
 
+  const checkExistingBooking = async (email: string) => {
+    try {
+      const checkFn = httpsCallable(functions, "checkExistingBooking");
+      const result: any = await checkFn({ email });
+      return result.data;
+    } catch (err: any) {
+      console.error("Check existing booking error:", err);
+      return { exists: false, error: err.message };
+    }
+  };
+
+  const deleteBooking = async (docId: string) => {
+    setIsBooking(true);
+    try {
+      const deleteFn = httpsCallable(functions, "deleteBooking");
+      const result: any = await deleteFn({ docId });
+      return result.data;
+    } catch (err: any) {
+      console.error("Delete booking error:", err);
+      return { success: false, error: err.message };
+    } finally {
+      setIsBooking(false);
+    }
+  };
+
+  const updateBooking = async (oldDocId: string, newDate: string, newTime: string) => {
+    setIsBooking(true);
+    try {
+      const updateFn = httpsCallable(functions, "updateBooking");
+      const result: any = await updateFn({ oldDocId, newDate, newTime });
+      return result.data;
+    } catch (err: any) {
+      console.error("Update booking error:", err);
+      return { success: false, error: err.message };
+    } finally {
+      setIsBooking(false);
+    }
+  };
+
+  const getBooking = async (docId: string) => {
+    try {
+      const getFn = httpsCallable(functions, "getBooking");
+      const result: any = await getFn({ docId });
+      return result.data;
+    } catch (err: any) {
+      console.error("Get booking error:", err);
+      return { success: false, error: err.message };
+    }
+  };
+
   return {
     isBooking,
     error,
@@ -162,5 +212,10 @@ export const useConsultationBooking = () => {
     bookingData,
     handleBooking,
     retryBooking,
+    checkExistingBooking,
+    deleteBooking,
+    updateBooking,
+    getBooking,
+    setBookingData,
   };
 };

@@ -9,7 +9,7 @@ interface PhotoUploadProps {
 
 const PhotoUpload: React.FC<PhotoUploadProps> = ({ photos, onChange, onRemove }) => {
   return (
-    <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-8 md:p-10 backdrop-blur-3xl group">
+    <div className="bg-white/[0.03] border border-white/10 rounded-[1.5rem] p-4 md:p-8 backdrop-blur-3xl group">
       <div className="flex items-center gap-4 mb-6">
         <div className="p-3 bg-primary/20 text-primary rounded-xl">
           <ImageIcon size={24} />
