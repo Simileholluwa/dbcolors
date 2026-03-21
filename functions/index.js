@@ -35,6 +35,9 @@ const {
  * createBooking
  */
 exports.createBooking = onCall(async (request) => {
+  let calendarEventId = null;
+  let firestoreDocPath = null;
+
   try {
     const { email, name, selectedPackage, date, time, assets, preferences } = request.data;
     if (!email || !selectedPackage || !date || !time) {
@@ -67,12 +70,15 @@ exports.createBooking = onCall(async (request) => {
       guestsCanInviteOthers: false,
     };
 
+    // 1. Google Calendar event creation
     const calendarResponse = await calendar.events.insert({
       calendarId: "primary",
       requestBody: event,
       conferenceDataVersion: 1,
       sendUpdates: 'all',
     });
+
+    calendarEventId = calendarResponse.data.id;
 
     const hangoutLink = calendarResponse.data.hangoutLink ||
       calendarResponse.data.conferenceData?.entryPoints?.[0]?.uri ||
@@ -109,39 +115,84 @@ exports.createBooking = onCall(async (request) => {
       status: "confirmed",
     };
 
+    // 2. Firestore write
+    const docId = `${date}_${time.replace(":", "")}_${email}`;
+    firestoreDocPath = `consultations/${docId}`;
+
     await admin
       .firestore()
-      .collection("consultations")
-      .doc(`${date}_${time.replace(":", "")}_${email}`)
+      .doc(firestoreDocPath)
       .set(bookingData);
 
-    try {
-      await sendConfirmationEmail(email, {
-        package: selectedPackage.name,
-        date,
-        time,
-        hangoutLink,
-        name,
-      });
+    // 3. Email notifications
+    await sendConfirmationEmail(email, {
+      package: selectedPackage.name,
+      date,
+      time,
+      hangoutLink,
+      name,
+    });
 
-      await sendAdminNotificationEmail(process.env.EMAIL_USER, {
-        package: selectedPackage.name,
-        email,
-        date,
-        time,
-        hangoutLink,
-        preferences,
-        assets: assetUrls,
-        name,
-      });
-    } catch (mailError) {
-      console.error("Failed to send confirmation email:", mailError);
-    }
+    await sendAdminNotificationEmail(process.env.EMAIL_USER, {
+      package: selectedPackage.name,
+      email,
+      date,
+      time,
+      hangoutLink,
+      preferences,
+      assets: assetUrls,
+      name,
+    });
 
     return { success: true, hangoutLink };
   } catch (error) {
-    console.error("Error in createBooking:", error);
-    throw new HttpsError("internal", error.message);
+    console.error("Error in createBooking (rolling back if necessary):", error);
+
+    // ROLLBACK: Delete successfully created resources if an error occurred subsequently
+    if (calendarEventId) {
+      try {
+        await calendar.events.delete({ calendarId: "primary", eventId: calendarEventId });
+        console.log(`Rolled back Google Calendar event: ${calendarEventId}`);
+      } catch (rollbackError) {
+        console.error("Failed to rollback Google Calendar event:", rollbackError);
+      }
+    }
+
+    if (firestoreDocPath) {
+      try {
+        await admin.firestore().doc(firestoreDocPath).delete();
+        console.log(`Rolled back Firestore document: ${firestoreDocPath}`);
+      } catch (rollbackError) {
+        console.error("Failed to rollback Firestore document:", rollbackError);
+      }
+    }
+
+    // ROLLBACK: Delete uploaded assets from Storage
+    const { assets } = request.data;
+    if (assets) {
+      try {
+        const bucket = admin.storage().bucket();
+        const allPaths = [
+          ...(assets.photos || []),
+          assets.drawing,
+          assets.layout,
+        ].filter(Boolean);
+
+        for (const path of allPaths) {
+          await bucket.file(path).delete().catch((e) => {
+            if (e.code !== 404) {
+              console.error(`Failed to delete asset ${path} during rollback:`, e);
+            }
+          });
+        }
+        console.log(`Rolled back ${allPaths.length} assets from Storage`);
+      } catch (rollbackError) {
+        console.error("Failed to rollback assets from Storage:", rollbackError);
+      }
+    }
+
+    if (error instanceof HttpsError) throw error;
+    throw new HttpsError("internal", error.message || "Failed to create booking");
   }
 });
 
