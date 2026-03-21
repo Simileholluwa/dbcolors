@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ManagementView from "./ManagementView";
 import { Metadata } from "next";
 
@@ -8,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ManageConsultationsPage() {
-  return <ManagementView />;
+  return (
+    <Suspense fallback={null}>
+      <ManagementView />
+    </Suspense>
+  );
 }

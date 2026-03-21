@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ConsultationView from "./ConsultationView";
 
@@ -12,5 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function ConsultationPage() {
-  return <ConsultationView />;
+  return (
+    <Suspense fallback={null}>
+      <ConsultationView />
+    </Suspense>
+  );
 }
