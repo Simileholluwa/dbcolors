@@ -153,7 +153,54 @@ const sendAdminNotificationEmail = async (to, bookingDetails) => {
   return sendEmail(to, `[NEW BOOKING] ${package} - ${email}`, htmlBody);
 };
 
+/**
+ * sendReminderEmail
+ */
+const sendReminderEmail = async (to, bookingDetails, type = "24h") => {
+  const { package, date, time, hangoutLink, name } = bookingDetails;
+  const primaryColor = "#99ff00";
+  const secondaryColor = "#0A0A0A";
+  const typeText = type === "24h" ? "Tomorrow" : "In 1 Hour";
+
+  const htmlBody = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      </head>
+      <body style="background-color: #050505; margin: 0; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: ${secondaryColor}; border: 1px solid rgba(153, 255, 0, 0.1); border-radius: 24px;">
+          <tr>
+            <td align="center" style="padding: 40px;">
+              <p style="color: ${primaryColor}; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em; font-size: 10px; margin: 0 0 10px 0;">Reminder: ${typeText}</p>
+              <h1 style="color: #ffffff; font-size: 32px; font-weight: 900; margin: 0; letter-spacing: -0.05em;">Dignified Brand Colors</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 40px 40px 40px; text-align: center;">
+              <p style="color: #ffffff; font-size: 18px; margin: 0 0 10px 0; font-weight: 700;">Hi ${name || "there"},</p>
+              <p style="color: rgba(255, 255, 255, 0.6); font-size: 14px; margin: 0 0 30px 0; line-height: 1.6;">Just a quick reminder about your <strong>${package}</strong> consultation ${type === "24h" ? "tomorrow" : "starting soon"}.</p>
+              
+              <div style="background: rgba(153, 255, 0, 0.05); border: 1px solid rgba(153, 255, 0, 0.1); padding: 25px; border-radius: 20px;">
+                <p style="color: #ffffff; font-size: 14px; margin: 0 0 5px 0; font-weight: 700;">${date} @ ${time}</p>
+                <p style="color: rgba(255, 255, 255, 0.4); font-size: 11px; margin: 0;">WAT (GMT+1)</p>
+                <div style="margin-top: 20px;">
+                  <a href="${hangoutLink || '#'}" style="text-decoration: none; background: ${primaryColor}; color: ${secondaryColor}; padding: 12px 25px; border-radius: 12px; font-weight: 900; font-size: 12px; display: inline-block;">Join Google Meet</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </body>
+    </html>
+  `;
+
+  return sendEmail(to, `Reminder: Consultation ${typeText}`, htmlBody);
+};
+
 module.exports = {
   sendConfirmationEmail,
-  sendAdminNotificationEmail
+  sendAdminNotificationEmail,
+  sendReminderEmail
 };

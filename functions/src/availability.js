@@ -10,6 +10,7 @@ const {
   setSeconds,
   isBefore,
   addMinutes,
+  subMinutes,
   format,
   startOfDay,
   endOfDay
@@ -19,6 +20,7 @@ const {
   calendar,
   TIMEZONE,
   WORKING_HOURS,
+  BUFFER_TIME,
   CALENDAR_ID
 } = require("../lib/config");
 
@@ -118,8 +120,8 @@ exports.getAvailableSlots = onCall(async (request) => {
     while (currentSlot < workEnd) {
       const slotEnd = addMinutes(currentSlot, 30);
       const isBusy = busyPeriods.some((busy) => {
-        const busyS = new Date(busy.start);
-        const busyE = new Date(busy.end);
+        const busyS = subMinutes(new Date(busy.start), BUFFER_TIME);
+        const busyE = addMinutes(new Date(busy.end), BUFFER_TIME);
         return (
           (currentSlot >= busyS && currentSlot < busyE) ||
           (slotEnd > busyS && slotEnd <= busyE)

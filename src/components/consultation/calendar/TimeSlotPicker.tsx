@@ -29,7 +29,12 @@ const TimeSlotPicker: React.FC<TimeSlotPickerProps> = ({
             className="flex-1 flex flex-col"
           >
             <div className="flex items-center justify-between mb-4 px-2">
-              <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Select Time</span>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest">Select Time</span>
+                <span className="text-[8px] text-primary/60 font-black uppercase tracking-[0.2em]">
+                  {Intl.DateTimeFormat().resolvedOptions().timeZone.replace("_", " ")} Time
+                </span>
+              </div>
               {isLoadingTimes && <span className="text-[10px] text-primary animate-pulse font-black uppercase tracking-widest">Loading...</span>}
             </div>
 

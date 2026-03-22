@@ -17,6 +17,7 @@ const WORKING_HOURS = {
   start: 9,
   end: 17
 };
+const BUFFER_TIME = 15;
 const CALENDAR_ID = process.env.CALENDAR_ID || "primary";
 const EMAIL_USER = process.env.EMAIL_USER;
 

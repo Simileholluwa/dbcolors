@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./globals.css";
 
 import DraftingCanvas from "@/components/DraftingCanvas";
+import { AdminAuthProvider } from "@/context/AdminAuthContext";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -136,19 +137,21 @@ export default function RootLayout({
       <body
         className={`${raleway.variable} antialiased font-raleway bg-secondary text-white relative`}
       >
-        <DraftingCanvas />
-        <div
-          className="fixed inset-0 z-0 pointer-events-none opacity-[0.07] mix-blend-screen"
-          style={{
-            backgroundImage: "url('/bg-house.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-        <main className="relative z-10">
-          {children}
-        </main>
+        <AdminAuthProvider>
+          <DraftingCanvas />
+          <div
+            className="fixed inset-0 z-0 pointer-events-none opacity-[0.07] mix-blend-screen"
+            style={{
+              backgroundImage: "url('/bg-house.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+          <main className="relative z-10">
+            {children}
+          </main>
+        </AdminAuthProvider>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
-const { isWithinInterval, addMinutes } = require("date-fns");
+const { isWithinInterval, addMinutes, subMinutes } = require("date-fns");
+const { BUFFER_TIME } = require("./config");
 
 /**
  * Checks if a day has at least one 30-min slot available
@@ -10,8 +11,9 @@ const checkAvailabilityForDay = (workStart, workEnd, busyPeriods) => {
     const slotEnd = addMinutes(currentSlot, 30);
 
     const isBusy = busyPeriods.some((busy) => {
-      const busyStart = new Date(busy.start);
-      const busyEnd = new Date(busy.end);
+      const busyStart = subMinutes(new Date(busy.start), BUFFER_TIME);
+      const busyEnd = addMinutes(new Date(busy.end), BUFFER_TIME);
+
       return (
         isWithinInterval(slotStart, { start: busyStart, end: addMinutes(busyEnd, -1) }) ||
         isWithinInterval(addMinutes(slotEnd, -1), { start: busyStart, end: busyEnd })

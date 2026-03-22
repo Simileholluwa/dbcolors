@@ -25,6 +25,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button, 
+[role="button"] {
+  cursor: pointer;
+}
+
 [id] {
   scroll-margin-top: 100px;
 }
