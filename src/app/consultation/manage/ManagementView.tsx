@@ -7,62 +7,38 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useConsultationBooking } from "@/hooks/useConsultationBooking";
 import EmailSearchForm from "@/components/consultation/manage/EmailSearchForm";
 import BookingCard from "@/components/consultation/manage/BookingCard";
+import { useManagement } from "@/hooks/useManagement";
 
 const ManagementView = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [email, setEmail] = React.useState(searchParams.get("email") || "");
-  const [bookings, setBookings] = React.useState<any[]>([]);
-  const [isSearching, setIsSearching] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-  const [success, setSuccess] = React.useState<string | null>(null);
+  const initialEmail = searchParams.get("email") || "";
 
-  const { checkExistingBooking, deleteBooking } = useConsultationBooking();
+  const {
+      email,
+      setEmail,
+      bookings,
+      isSearching,
+      error,
+      success,
+      handleFetchBookings,
+      handleDelete,
+      setError,
+      setSuccess
+  } = useManagement(initialEmail);
 
   // Auto-fetch if email is provided in query
   React.useEffect(() => {
-    const initialEmail = searchParams.get("email");
     if (initialEmail && initialEmail.includes("@")) {
-      handleFetchBookings(undefined, initialEmail);
+      handleFetchBookings(initialEmail);
     }
-  }, []);
+  }, [initialEmail, handleFetchBookings]);
 
-  const handleFetchBookings = async (e?: React.FormEvent, searchEmail?: string) => {
+  const onFetchBookings = (e?: React.FormEvent, searchEmail?: string) => {
     if (e) e.preventDefault();
-    const targetEmail = searchEmail || email;
-    if (!targetEmail.includes("@")) return;
-
-    setIsSearching(true);
-    setError(null);
-    setSuccess(null);
-
-    const result = await checkExistingBooking(targetEmail);
-    setIsSearching(false);
-
-    if (result?.exists && Array.isArray(result?.bookings)) {
-      setBookings(result.bookings);
-    } else {
-      setBookings([]);
-      setError(`No future consultations found for ${targetEmail}.`);
-    }
-  };
-
-  const handleDelete = async (bookingId: string) => {
-    if (!window.confirm("Are you sure you want to cancel this consultation?")) return;
-
-    setIsSearching(true);
-    const result = await deleteBooking(bookingId);
-    setIsSearching(false);
-
-    if (result.success) {
-      setBookings((prev) => prev.filter((b) => b.id !== bookingId));
-      setSuccess("Consultation cancelled successfully.");
-    } else {
-      setError(result.error || "Failed to cancel consultation.");
-    }
+    handleFetchBookings(searchEmail);
   };
 
   const handleUpdate = (bookingId: string) => {
@@ -97,7 +73,7 @@ const ManagementView = () => {
             <EmailSearchForm
               email={email}
               setEmail={setEmail}
-              onSubmit={handleFetchBookings}
+              onSubmit={onFetchBookings}
               isSearching={isSearching}
             />
 

@@ -1,44 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { 
   Users, 
   Calendar, 
   Clock, 
   TrendingUp,
-  ArrowUpRight
+  ArrowUpRight,
+  Loader2
 } from "lucide-react";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "@/lib/firebase";
+import { useAdminStats } from "@/hooks/useAdminStats";
 
 const DashboardPage = () => {
-  const [stats, setStats] = useState({
-    totalBookings: 0,
-    upcomingBookings: 0,
-    recentClients: 0
-  });
-
-  useEffect(() => {
-    // Fetch summary stats
-    const fetchStats = async () => {
-      try {
-        const getAllBookings = httpsCallable(functions, "getAllBookings");
-        const result: any = await getAllBookings();
-        if (result.data.success) {
-          const bookings = result.data.bookings;
-          setStats({
-            totalBookings: bookings.length,
-            upcomingBookings: bookings.filter((b: any) => new Date(b.startDateTime) > new Date()).length,
-            recentClients: new Set(bookings.map((b: any) => b.email)).size
-          });
-        }
-      } catch (err) {
-        console.error("Error fetching stats:", err);
-      }
-    };
-    fetchStats();
-  }, []);
+  const { stats, isLoading, error } = useAdminStats();
 
   const cards = [
     { name: "Total Sessions", value: stats.totalBookings, icon: Calendar, color: "text-primary" },
@@ -56,6 +31,12 @@ const DashboardPage = () => {
         <p className="text-white/40 text-xs md:text-sm font-medium tracking-wide">Welcome back to the administrative control center.</p>
       </header>
 
+      {error && (
+        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl mb-8 text-red-400 text-sm">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {cards.map((card, index) => (
           <motion.div
@@ -72,7 +53,9 @@ const DashboardPage = () => {
               <ArrowUpRight className="text-white/10 group-hover:text-primary transition-colors" size={16} />
             </div>
             <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">{card.name}</p>
-            <h3 className="text-3xl font-black tracking-tighter text-white">{card.value}</h3>
+            <h3 className="text-3xl font-black tracking-tighter text-white">
+              {isLoading ? <Loader2 className="animate-spin" size={24} /> : card.value}
+            </h3>
           </motion.div>
         ))}
       </div>
