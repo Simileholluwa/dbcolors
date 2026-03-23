@@ -23,7 +23,6 @@ const Navbar = () => {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      // Create a 25% thick detection zone near the top of the viewport
       rootMargin: "-20% 0px -55% 0px",
       threshold: 0,
     };
@@ -38,7 +37,6 @@ const Navbar = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Track Hero, About, Packages, Testimonials, FAQ, CTA, and Footer
     ["hero", "about", "packages", "testimonials", "faq", "cta", "footer"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -65,7 +63,7 @@ const Navbar = () => {
 
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 84; // Adjusted for better precision
+      const navbarHeight = 84;
       const top = element.getBoundingClientRect().top + window.scrollY - navbarHeight;
       window.scrollTo({ top, behavior: "smooth" });
     }
@@ -73,7 +71,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent backdrop-blur-none"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black backdrop-blur-sm" : "bg-transparent backdrop-blur-none"
         }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between relative">

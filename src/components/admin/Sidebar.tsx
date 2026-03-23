@@ -3,11 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Calendar, 
-  Settings, 
-  LogOut, 
+import {
+  LayoutDashboard,
+  Calendar,
+  Settings,
+  LogOut,
   ChevronRight,
   ShieldCheck
 } from "lucide-react";
@@ -25,7 +25,7 @@ const Sidebar = ({ onClose }: { onClose?: () => void }) => {
   ];
 
   return (
-    <aside className="w-full h-full bg-secondary border-r border-white/5 flex flex-col">
+    <aside className="w-full h-full bg-secondary border-r border-white/10 flex flex-col">
       <div className="p-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -49,8 +49,8 @@ const Sidebar = ({ onClose }: { onClose?: () => void }) => {
                 onClick={onClose}
                 className={`
                   flex items-center justify-between px-4 py-3 rounded-xl transition-all group
-                  ${isActive 
-                    ? "bg-primary text-secondary shadow-[0_0_20px_rgba(153,255,0,0.15)]" 
+                  ${isActive
+                    ? "bg-primary text-secondary shadow-[0_0_20px_rgba(153,255,0,0.15)]"
                     : "text-white/40 hover:text-white hover:bg-white/5"
                   }
                 `}
@@ -70,7 +70,7 @@ const Sidebar = ({ onClose }: { onClose?: () => void }) => {
         </nav>
       </div>
 
-      <div className="mt-auto p-8 border-t border-white/5">
+      <div className="mt-auto p-8 border-t border-white/10">
         <div className="mb-6">
           <p className="text-[8px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">Authenticated as</p>
           <p className="text-[10px] font-bold text-white/60 truncate">{user?.email}</p>

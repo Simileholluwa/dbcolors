@@ -82,7 +82,7 @@ export default function AdminLayout({
         )}
       </AnimatePresence>
 
-      <main className="flex-1 relative z-10 overflow-y-auto w-full">
+      <main className="flex-1 relative overflow-y-auto w-full">
         {children}
       </main>
     </div>

@@ -59,7 +59,7 @@ const AdminBookingsPage = () => {
     <div className="p-6 md:p-12">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
         <div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2">
+          <h1 className="text-3xl md:text-4xl font-black tracking-tighter mb-2 text-white">
             Booking <span className="text-primary italic">Management</span>
           </h1>
           <p className="text-white/40 font-medium tracking-wide">Overview of all consultation sessions</p>
@@ -103,13 +103,13 @@ const AdminBookingsPage = () => {
             >
               <div className={`flex items-stretch justify-between h-[72px] md:h-[84px]`}>
                 {/* Time Block */}
-                <div className="bg-primary w-[72px] md:w-[120px] h-full flex flex-col items-center justify-center shrink-0">
+                <div className="bg-primary w-[72px] md:w-[90px] lg:w-[120px] h-full flex flex-col items-center justify-center shrink-0">
                   <span className="text-[10px] md:text-xs font-black text-secondary/60 uppercase tracking-widest leading-none mb-1">Time</span>
                   <span className="text-lg md:text-2xl font-black text-secondary tracking-tighter leading-none">{booking.time}</span>
                 </div>
 
                 {/* Info Section */}
-                <div className="flex-1 flex items-center p-4 md:px-8">
+                <div className="flex-1 flex items-center p-4 lg:px-8">
                   <div className="flex-1 min-w-0">
                     <h3 className="text-sm md:text-base font-black tracking-tight text-white/90 truncate mr-4">
                       {booking.name}
@@ -128,7 +128,7 @@ const AdminBookingsPage = () => {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/5">
+                    <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/5">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                       <span className="text-[8px] font-black text-white/40 uppercase tracking-widest whitespace-nowrap">Confirmed</span>
                     </div>
@@ -162,26 +162,18 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+        className="absolute inset-0 backdrop-blur-md"
       />
 
-      <motion.div
-        initial={{ y: "100%", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: "100%", opacity: 0 }}
-        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+      <div
         className="relative w-full max-w-4xl bg-secondary rounded-t-[1.5rem] md:rounded-[1.5rem] border-t md:border border-white/10 shadow-2xl overflow-hidden max-h-[90vh] md:max-h-[85vh] flex flex-col"
       >
-        <div className="md:hidden flex justify-center p-4">
-          <div className="w-12 h-1.5 bg-white/10 rounded-full" />
-        </div>
-
-        <div className="relative p-6 md:p-10 border-b border-white/5">
+        <div className="relative p-6 md:p-8 lg:p-10 border-b border-white/10">
           <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-xl bg-white/5 text-white/40 hover:text-white transition-colors z-20"
+            className="absolute top-4 right-6 md:top-0 md:right-0 p-2 rounded-xl md:rounded-none md:rounded-tr-xl md:rounded-bl-xl bg-white/10 text-red/40 hover:text-red z-20"
           >
             <X size={24} />
           </button>
@@ -195,7 +187,7 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
               </div>
 
               <div>
-                <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-white mb-2 leading-none">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-white mb-2 leading-none">
                   {booking.name}
                 </h2>
                 <div className="flex items-center gap-4 text-white/40">
@@ -207,7 +199,7 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
               </div>
             </div>
 
-            <div className="bg-white/5 p-5 rounded-[1.5rem] border border-white/5 flex items-center gap-8 px-8">
+            <div className="bg-white/5 p-4 md:p-5 rounded-2xl border border-white/5 flex items-center gap-4 md:gap-8 px-6 md:px-8">
               <div className="flex flex-col">
                 <span className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Session Date</span>
                 <div className="flex items-center gap-2">
@@ -227,14 +219,14 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 md:p-10 space-y-8">
+        <div className="flex-1 overflow-y-auto p-6 md:p-8 lg:p-10 space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/5 space-y-4">
               <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                 <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center">
                   <User className="text-primary/60" size={16} />
                 </div>
-                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white/40">Technical Scope</span>
+                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white/40">Design preferences</span>
               </div>
               <p className="text-sm md:text-base text-white/60 leading-relaxed font-medium">
                 {booking.preferences || "No additional technical constraints provided for this briefing session."}
@@ -246,7 +238,7 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
                 <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center">
                   <Package className="text-primary/60" size={16} />
                 </div>
-                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white/40">Verified Assets</span>
+                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white/40">Assets</span>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -257,7 +249,7 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
                   <p className={`text-2xl font-black tracking-tighter mb-1 ${booking.assets?.photos?.length > 0 ? "text-primary" : "text-white"}`}>
                     {booking.assets?.photos?.length || 0}
                   </p>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-white/40">Scanning Images</p>
+                  <p className="text-[9px] font-black uppercase tracking-widest text-white/40">Images/Videos</p>
                 </div>
                 <div className={`p-4 rounded-2xl border transition-all ${booking.assets?.drawing
                   ? "bg-primary/5 border-primary/20"
@@ -291,7 +283,7 @@ const BookingDetailsDialog = ({ booking, onClose, onDelete }: { booking: any, on
             </button>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
