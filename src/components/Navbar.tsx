@@ -18,6 +18,7 @@ const Navbar = () => {
     { name: "Packages", href: "packages" },
     { name: "Testimonials", href: "testimonials" },
     { name: "FAQs", href: "faq" },
+    { name: "Easter Promo", href: "/easter-promo", isExternal: true },
   ];
 
   useEffect(() => {
@@ -81,35 +82,53 @@ const Navbar = () => {
         </Link>
 
         {/* Links - Absolute Center */}
-        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
+        <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
           {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => scrollToSection(link.href)}
-              className={`text-sm font-bold transition-all tracking-widest uppercase relative group ${activeSection === link.href ? "text-primary" : "text-white/40 hover:text-white"
-                }`}
-            >
-              {link.name}
-              {activeSection === link.href && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </button>
+            link.isExternal ? (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-bold transition-all tracking-widest uppercase relative group ${pathname === link.href ? "text-primary" : "text-white/40 hover:text-white"
+                  }`}
+              >
+                {link.name}
+                {pathname === link.href && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            ) : (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className={`text-sm font-bold transition-all tracking-widest uppercase relative group ${activeSection === link.href ? "text-primary" : "text-white/40 hover:text-white"
+                  }`}
+              >
+                {link.name}
+                {activeSection === link.href && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+            )
           ))}
         </div>
 
         {/* CTA - Right */}
         <div className="flex items-center gap-4 relative z-10">
-          <button className="hidden md:block bg-primary text-secondary px-6 py-2.5 rounded-xl text-sm font-bold hover:brightness-110 active:scale-95 transition-all"
+          <button className="hidden lg:block bg-primary text-secondary px-6 py-2.5 rounded-xl text-sm font-bold hover:brightness-110 active:scale-95 transition-all"
             onClick={() => scrollToSection("packages")}
           >
             View Packages
           </button>
           <button
-            className="md:hidden text-white p-2"
+            className="lg:hidden text-white p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -124,24 +143,43 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black border-t border-white/10 p-6 flex flex-col gap-6"
+            className="lg:hidden bg-black border-t border-white/10 p-6 flex flex-col gap-6"
           >
             {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => scrollToSection(link.href)}
-                className={`text-2xl font-black tracking-tighter text-left transition-colors relative w-fit ${activeSection === link.href ? "text-primary" : "text-white/60 hover:text-white"
-                  }`}
-              >
-                {link.name}
-                {activeSection === link.href && (
-                  <motion.div
-                    layoutId="activeNavMobile"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </button>
+              link.isExternal ? (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-2xl font-black tracking-tighter text-left transition-colors relative w-fit ${pathname === link.href ? "text-primary" : "text-white/60 hover:text-white"
+                    }`}
+                >
+                  {link.name}
+                  {pathname === link.href && (
+                    <motion.div
+                      layoutId="activeNavMobile"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              ) : (
+                <button
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  className={`text-2xl font-black tracking-tighter text-left transition-colors relative w-fit ${activeSection === link.href ? "text-primary" : "text-white/60 hover:text-white"
+                    }`}
+                >
+                  {link.name}
+                  {activeSection === link.href && (
+                    <motion.div
+                      layoutId="activeNavMobile"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              )
             ))}
             <button
               onClick={() => scrollToSection("packages")}
