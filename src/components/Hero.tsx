@@ -52,9 +52,7 @@ const Hero = () => {
               </motion.button>
             </motion.div>
           </div>
-
-          {/* Right Segment: Consultation CTA Card */}
-          <div className="relative w-full flex flex-col justify-center items-center lg:items-end lg:py-40">
+          <div className="relative w-full flex flex-col justify-center items-center lg:items-end lg:mb-0 lg:h-screen lg:sticky lg:top-0 ">
             <div
               className="w-full max-w-md bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[1.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden group"
             >

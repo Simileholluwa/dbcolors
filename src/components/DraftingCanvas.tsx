@@ -13,8 +13,6 @@ const DraftingCanvas = () => {
 
   // Diverse parallax layers
   const ySlow = useTransform(scrollY, [0, 5000], [0, -100]);
-  const yMid = useTransform(scrollY, [0, 5000], [0, -300]);
-  const yFast = useTransform(scrollY, [0, 5000], [0, -500]);
 
   if (!mounted) return null;
 
