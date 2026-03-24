@@ -4,15 +4,15 @@ import EasterPromoView from "./EasterPromoView";
 import { easterPackages } from "@/data/easterPromo";
 
 export const metadata: Metadata = {
-  title: "Easter Home Transformation Deals 2024 | dbcolors.ng",
+  title: "Easter Home Transformation Deals 2026 | dbcolors.ng",
   description: "Exclusive interior design and renovation packages for Easter. From kitchen transformations to full duplex renovations, bring luxury to your home this season.",
   openGraph: {
-    title: "Easter Home Transformation Deals 2024 | dbcolors.ng",
+    title: "Easter Home Transformation Deals 2026 | dbcolors.ng",
     description: "Celebrate Easter with a home makeover. Special tiered packages for kitchens, living rooms, and full-scale renovations.",
     url: "https://dbcolors.ng/easter-promo",
     images: [
       {
-        url: "/promo/easter/kitchen.png", // Using one of the promo images as representative
+        url: "/promo/easter/kitchen.png",
         width: 1200,
         height: 630,
         alt: "dbcolors.ng Easter Promotion",
