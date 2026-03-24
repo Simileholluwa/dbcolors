@@ -9,6 +9,21 @@ export const metadata: Metadata = {
     title: "Interior Design Consultation | dbcolors.ng",
     description: "Tailored design expertise to bring your architectural dreams to life. Select a consultation tier that matches your project scope.",
     url: "https://dbcolors.ng/consultation",
+    images: [
+      {
+        url: "/gallery/interior-1.png",
+        width: 1200,
+        height: 630,
+        alt: "dbcolors.ng Consultation Services",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Interior Design Consultation | dbcolors.ng",
+    description: "Book your professional design consultation today.",
+    images: ["/gallery/interior-1.png"],
   },
 };
 
