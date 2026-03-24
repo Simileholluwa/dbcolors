@@ -11,11 +11,14 @@ export const EasterHero = () => {
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Easter Promotion 2026</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-8 leading-[0.9]">
-            Transform Your <span className="text-primary italic">Sanctuary </span> This Easter
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-4 md:mb-8">
+            Transform Your <br />
+            <span className="text-primary italic">Sanctuary</span>, This
+            <br />
+            Easter
           </h1>
 
-          <p className="text-white/40 text-md md:text-xl font-medium italic max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/40 text-sm md:text-lg font-medium italic max-w-2xl mx-auto leading-relaxed">
             Exclusive, limited-time interior design and renovation packages tailored for modern living. Valid from March 20 – April 10, 2026.
           </p>
         </div>

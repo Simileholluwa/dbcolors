@@ -74,7 +74,7 @@ const DraftingCanvas = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] [background-size:20px_20px]" />
 
       {/* 5. Tactical Texture (Film Grain Overlay) */}
-      <div className="absolute inset-0 opacity-[0.35] mix-blend-overlay pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 opacity-[0.35] mix-blend-overlay pointer-events-none bg-[url('/noise.svg')]" />
     </div>
   );
 };
