@@ -53,21 +53,25 @@ export const useAdminBookings = () => {
   }, [authLoading, user, fetchBookings]);
 
   const deleteBooking = async (docId: string) => {
-    if (!confirm("Are you sure you want to delete this booking? This will also remove the calendar event.")) return;
-    
+    const previousBookings = [...bookings];
+    setBookings(prev => prev.filter(b => b.id !== docId));
+    if (selectedBooking?.id === docId) {
+      setSelectedBooking(null);
+    }
+
     try {
       const deleteFn = httpsCallable(functions, "deleteBooking");
       const result: any = await deleteFn({ docId });
-      if (result.data.success) {
-        setBookings(prev => prev.filter(b => b.id !== docId));
-        if (selectedBooking?.id === docId) setSelectedBooking(null);
-        return { success: true };
-      } else {
+
+      if (!result.data.success) {
         throw new Error(result.data.error || "Failed to delete booking");
       }
+
+      return { success: true };
     } catch (err: any) {
       console.error("Delete error:", err);
-      alert(err.message || "Failed to delete booking");
+      setBookings(previousBookings);
+      setError(`Failed to delete booking: ${err.message}. The list has been restored.`);
       return { success: false, error: err.message };
     }
   };

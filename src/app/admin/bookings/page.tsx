@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Loader2, Calendar, Package, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdminBookings } from "@/hooks/useAdminBookings";
 import { BookingDetailsDialog } from "@/components/admin/BookingDetailsDialog";
+import { AlertDialog } from "@/components/ui/AlertDialog";
 
 const AdminBookingsPage = () => {
   const {
@@ -17,6 +18,8 @@ const AdminBookingsPage = () => {
     openDetails,
     closeDetails,
   } = useAdminBookings();
+
+  const [bookingToDelete, setBookingToDelete] = useState<string | null>(null);
 
   return (
     <div className="p-6 md:p-12">
@@ -111,11 +114,21 @@ const AdminBookingsPage = () => {
             onClose={closeDetails}
             onDelete={(e) => {
               e.stopPropagation();
-              deleteBooking(selectedBooking.id);
+              setBookingToDelete(selectedBooking.id);
             }}
           />
         )}
       </AnimatePresence>
+
+      <AlertDialog
+        isOpen={!!bookingToDelete}
+        onClose={() => setBookingToDelete(null)}
+        onConfirm={() => bookingToDelete && deleteBooking(bookingToDelete)}
+        title="Delete Booking"
+        description="Are you sure you want to delete this booking? This action cannot be undone and will also remove the associated calendar event."
+        confirmText="Delete Session"
+        variant="danger"
+      />
     </div>
   );
 };

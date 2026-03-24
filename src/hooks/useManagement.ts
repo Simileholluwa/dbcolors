@@ -36,7 +36,8 @@ export const useManagement = (initialEmail: string) => {
   }, [email, checkExistingBooking]);
 
   const handleDelete = async (bookingId: string) => {
-    if (!window.confirm("Are you sure you want to cancel this consultation?")) return;
+    const previousBookings = [...bookings];
+    setBookings((prev) => prev.filter((b) => b.id !== bookingId));
 
     setIsSearching(true);
     setError(null);
@@ -45,14 +46,14 @@ export const useManagement = (initialEmail: string) => {
     try {
       const result = await apiDeleteBooking(bookingId);
       if (result.success) {
-        setBookings((prev) => prev.filter((b) => b.id !== bookingId));
         setSuccess("Consultation cancelled successfully.");
       } else {
-        setError(result.error || "Failed to cancel consultation.");
+        throw new Error(result.error || "Failed to cancel consultation.");
       }
     } catch (err: any) {
       console.error("Delete booking error:", err);
-      setError("An error occurred while cancelling the consultation.");
+      setBookings(previousBookings);
+      setError(`Failed to cancel consultation: ${err.message}. The list has been restored.`);
     } finally {
       setIsSearching(false);
     }

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import EmailSearchForm from "@/components/consultation/manage/EmailSearchForm";
 import BookingCard from "@/components/consultation/manage/BookingCard";
 import { useManagement } from "@/hooks/useManagement";
+import { AlertDialog } from "@/components/ui/AlertDialog";
 
 const ManagementView = () => {
   const router = useRouter();
@@ -28,6 +29,8 @@ const ManagementView = () => {
       setError,
       setSuccess
   } = useManagement(initialEmail);
+
+  const [bookingToCancel, setBookingToCancel] = useState<string | null>(null);
 
   // Auto-fetch if email is provided in query
   React.useEffect(() => {
@@ -105,7 +108,7 @@ const ManagementView = () => {
                     key={booking.id}
                     booking={booking}
                     onUpdate={handleUpdate}
-                    onDelete={handleDelete}
+                    onDelete={(id) => setBookingToCancel(id)}
                   />
                 ))}
               </AnimatePresence>
@@ -115,6 +118,16 @@ const ManagementView = () => {
       </section>
 
       <Footer />
+
+      <AlertDialog
+        isOpen={!!bookingToCancel}
+        onClose={() => setBookingToCancel(null)}
+        onConfirm={() => bookingToCancel && handleDelete(bookingToCancel)}
+        title="Cancel Consultation"
+        description="Are you sure you want to cancel this consultation session? This action will remove the appointment from our schedule and free up the slot for others."
+        confirmText="Cancel Session"
+        variant="danger"
+      />
     </main>
   );
 };

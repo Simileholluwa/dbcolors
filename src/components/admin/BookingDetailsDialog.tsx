@@ -17,7 +17,7 @@ export const BookingDetailsDialog = ({ booking, onClose, onDelete }: BookingDeta
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="absolute inset-0 backdrop-blur-md"
+        className="absolute inset-0 bg-secondary/80"
       />
 
       <div
