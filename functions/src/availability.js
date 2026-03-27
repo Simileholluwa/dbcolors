@@ -28,10 +28,19 @@ const {
   checkAvailabilityForDay
 } = require("../lib/calendar");
 
+const ALLOWED_ORIGINS = [
+  "https://dbcolors.ng",
+  "https://admin.dbcolors.ng",
+  "https://dbcolorsng.com",
+  "https://admin.dbcolorsng.com",
+  "http://localhost:3000",
+  "https://dbcolors.netlify.app"
+];
+
 /**
  * getMonthlyAvailability
  */
-exports.getMonthlyAvailability = onCall(async (request) => {
+exports.getMonthlyAvailability = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     const data = request.data || {};
     const now = new Date();
@@ -85,7 +94,7 @@ exports.getMonthlyAvailability = onCall(async (request) => {
 /**
  * getAvailableSlots
  */
-exports.getAvailableSlots = onCall(async (request) => {
+exports.getAvailableSlots = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     let { date, year, month, day, calendarId = CALENDAR_ID } = request.data;
 

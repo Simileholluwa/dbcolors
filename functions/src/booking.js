@@ -12,10 +12,19 @@ const {
   sendAdminNotificationEmail
 } = require("../lib/email");
 
+const ALLOWED_ORIGINS = [
+  "https://dbcolors.ng",
+  "https://admin.dbcolors.ng",
+  "https://dbcolorsng.com",
+  "https://admin.dbcolorsng.com",
+  "http://localhost:3000",
+  "https://dbcolors.netlify.app"
+];
+
 /**
  * createBooking
  */
-exports.createBooking = onCall(async (request) => {
+exports.createBooking = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   let calendarEventId = null;
   let firestoreDocPath = null;
 
@@ -183,7 +192,7 @@ exports.createBooking = onCall(async (request) => {
 /**
  * checkExistingBooking
  */
-exports.checkExistingBooking = onCall(async (request) => {
+exports.checkExistingBooking = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     let { email } = request.data;
     if (!email) throw new HttpsError("invalid-argument", "Email is required");
@@ -219,7 +228,7 @@ exports.checkExistingBooking = onCall(async (request) => {
 /**
  * deleteBooking
  */
-exports.deleteBooking = onCall(async (request) => {
+exports.deleteBooking = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     const { docId } = request.data;
     if (!docId) throw new HttpsError("invalid-argument", "Document ID is required");
@@ -256,7 +265,7 @@ exports.deleteBooking = onCall(async (request) => {
 /**
  * updateBooking
  */
-exports.updateBooking = onCall(async (request) => {
+exports.updateBooking = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     // Note: If updateBooking is used by the client for rescheduling their own booking, 
     // we should check if they are the owner of the booking OR an admin.
@@ -319,7 +328,7 @@ exports.updateBooking = onCall(async (request) => {
 /**
  * getBooking
  */
-exports.getBooking = onCall(async (request) => {
+exports.getBooking = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     const { docId } = request.data;
     if (!docId) throw new HttpsError("invalid-argument", "Document ID is required");

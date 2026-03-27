@@ -1,10 +1,19 @@
 const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const { admin } = require("../lib/config");
 
+const ALLOWED_ORIGINS = [
+  "https://dbcolors.ng",
+  "https://admin.dbcolors.ng",
+  "https://dbcolorsng.com",
+  "https://admin.dbcolorsng.com",
+  "http://localhost:3000",
+  "https://dbcolors.netlify.app"
+];
+
 /**
  * getSignedUploadUrls
  */
-exports.getSignedUploadUrls = onCall(async (request) => {
+exports.getSignedUploadUrls = onCall({ cors: ALLOWED_ORIGINS }, async (request) => {
   try {
     let { email, files } = request.data;
     if (!email || !files || !Array.isArray(files)) {
