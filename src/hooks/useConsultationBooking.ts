@@ -25,7 +25,7 @@ export const useConsultationBooking = () => {
   } | null>(null);
   const [bookingData, setBookingData] = React.useState<any>(null);
 
-  const handleBooking = async (
+  const handleBooking = React.useCallback(async (
     isoDate: string,
     timeStr: string,
     displayDate: string,
@@ -142,9 +142,9 @@ export const useConsultationBooking = () => {
     } finally {
       setIsBooking(false);
     }
-  };
+  }, []);
 
-  const retryBooking = () => {
+  const retryBooking = React.useCallback(() => {
     if (lastAttempt) {
       handleBooking(
         lastAttempt.isoDate,
@@ -153,9 +153,9 @@ export const useConsultationBooking = () => {
         lastAttempt.params
       );
     }
-  };
+  }, [lastAttempt, handleBooking]);
 
-  const checkExistingBooking = async (email: string) => {
+  const checkExistingBooking = React.useCallback(async (email: string) => {
     try {
       const checkFn = httpsCallable(functions, "checkExistingBooking");
       const result: any = await checkFn({ email });
@@ -164,9 +164,9 @@ export const useConsultationBooking = () => {
       console.error("Check existing booking error:", err);
       return { exists: false, error: err.message };
     }
-  };
+  }, []);
 
-  const deleteBooking = async (docId: string) => {
+  const deleteBooking = React.useCallback(async (docId: string) => {
     setIsBooking(true);
     try {
       const deleteFn = httpsCallable(functions, "deleteBooking");
@@ -178,9 +178,9 @@ export const useConsultationBooking = () => {
     } finally {
       setIsBooking(false);
     }
-  };
+  }, []);
 
-  const updateBooking = async (oldDocId: string, newDate: string, newTime: string) => {
+  const updateBooking = React.useCallback(async (oldDocId: string, newDate: string, newTime: string) => {
     setIsBooking(true);
     try {
       const updateFn = httpsCallable(functions, "updateBooking");
@@ -192,9 +192,9 @@ export const useConsultationBooking = () => {
     } finally {
       setIsBooking(false);
     }
-  };
+  }, []);
 
-  const getBooking = async (docId: string) => {
+  const getBooking = React.useCallback(async (docId: string) => {
     try {
       const getFn = httpsCallable(functions, "getBooking");
       const result: any = await getFn({ docId });
@@ -203,7 +203,7 @@ export const useConsultationBooking = () => {
       console.error("Get booking error:", err);
       return { success: false, error: err.message };
     }
-  };
+  }, []);
 
   return {
     isBooking,

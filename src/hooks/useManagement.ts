@@ -35,7 +35,7 @@ export const useManagement = (initialEmail: string) => {
     }
   }, [email, checkExistingBooking]);
 
-  const handleDelete = async (bookingId: string) => {
+  const handleDelete = useCallback(async (bookingId: string) => {
     const previousBookings = [...bookings];
     setBookings((prev) => prev.filter((b) => b.id !== bookingId));
 
@@ -57,7 +57,7 @@ export const useManagement = (initialEmail: string) => {
     } finally {
       setIsSearching(false);
     }
-  };
+  }, [bookings, apiDeleteBooking]);
 
   return {
     email,
