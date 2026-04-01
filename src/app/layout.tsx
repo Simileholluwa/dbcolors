@@ -94,7 +94,7 @@ export default function RootLayout({
     image: "https://dbcolors.ng/gallery/interior-1.png",
     "@id": "https://dbcolors.ng",
     url: "https://dbcolors.ng",
-    telephone: "+234000000000", // Placeholder, user should update
+    telephone: "+2348164221214",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Lagos, Nigeria",
@@ -121,14 +121,29 @@ export default function RootLayout({
       closes: "18:00"
     },
     sameAs: [
-      "https://www.instagram.com/dbcolors.ng",
-      // Add other social links as needed
+      "https://www.instagram.com/dbcolorsng/",
+      "https://web.facebook.com/dbcolorsng",
+      "https://www.linkedin.com/company/dbcolors/",
+      "https://www.youtube.com/channel/UCk8Pwn3Rvj5jw1b0NsuzBqQ"
     ]
   };
 
   return (
     <html lang="en">
       <head>
+        {/* Automated reload mechanism for deployment mismatch (ChunkLoadError) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('error', (e) => {
+                if (e.message && e.message.includes('ChunkLoadError')) {
+                  console.warn('Deployment update detected. Reloading for newest version...');
+                  window.location.reload();
+                }
+              }, true);
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
