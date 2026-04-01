@@ -2,9 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin, Send } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube, Send, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
+  const socialLinks = [
+    { Icon: Instagram, href: "https://www.instagram.com/dbcolorsng/" },
+    { Icon: Facebook, href: "https://web.facebook.com/dbcolorsng" },
+    { Icon: Linkedin, href: "https://www.linkedin.com/company/dbcolors/" },
+    { Icon: Youtube, href: "https://www.youtube.com/channel/UCk8Pwn3Rvj5jw1b0NsuzBqQ" },
+  ];
+
   return (
     <footer className="bg-secondary text-white pt-12 md:pt-20 pb-12 overflow-hidden border-t border-white/10" id="footer">
       <div className="container mx-auto px-6">
@@ -14,12 +21,18 @@ const Footer = () => {
             <Link href="/" className="text-3xl font-black tracking-tighter mb-4 block">
               dbcolors<span className="text-primary">.ng</span>
             </Link>
-            <p className="text-white/40 leading-relaxed mb-4 max-w-xs">
+            <p className="text-white/40 leading-relaxed mb-6 max-w-xs text-sm font-medium italic">
               Redefining interior spaces with excellence, innovation, and a touch of premium craftsmanship since 2009.
             </p>
-            <div className="flex gap-4">
-              {[Instagram, Twitter, Facebook, Linkedin].map((Icon, i) => (
-                <Link key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-secondary transition-all">
+            <div className="flex gap-3">
+              {socialLinks.map(({ Icon, href }, i) => (
+                <Link
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary hover:text-secondary hover:border-transparent transition-all duration-300"
+                >
                   <Icon size={18} />
                 </Link>
               ))}
@@ -28,11 +41,11 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xl font-bold mb-4 italic text-white">Quick Links</h4>
-            <ul className="space-y-2">
-              {["Products", "Solutions", "Enterprise", "Resources", "Pricing"].map((link) => (
+            <h4 className="text-sm font-black uppercase tracking-[0.3em] mb-6 text-primary">Explore</h4>
+            <ul className="space-y-3">
+              {["Packages", "Gallery", "About Us", "Contact", "FAQ"].map((link) => (
                 <li key={link}>
-                  <Link href="#" className="text-white/40 hover:text-primary transition-colors">{link}</Link>
+                  <Link href={`/#${link.toLowerCase().replace(" ", "-")}`} className="text-white/40 hover:text-white transition-colors text-sm font-bold tracking-tight">{link}</Link>
                 </li>
               ))}
             </ul>
@@ -40,18 +53,42 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-xl font-bold mb-4 italic text-white">Contact</h4>
-            <ul className="space-y-2 text-white/40">
-              <li>Lagos, Nigeria</li>
-              <li>+234 800 123 4567</li>
-              <li>hello@dbcolors.ng</li>
-              <li>info@dbcolors.ng</li>
+            <h4 className="text-sm font-black uppercase tracking-[0.3em] mb-6 text-primary">Get In Touch</h4>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3 text-white/40 group">
+                <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                  <MapPin size={14} />
+                </div>
+                <span className="text-sm font-bold tracking-tight">Lagos, Nigeria</span>
+              </li>
+              <li className="flex items-center gap-3 text-white/40 group">
+                <Link href="tel:08164221214" className="flex items-center gap-3 hover:text-white transition-colors">
+                  <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                    <Phone size={14} />
+                  </div>
+                  <span className="text-sm font-bold tracking-tight">+2348164221214</span>
+                </Link>
+              </li>
+              <li className="flex flex-col gap-3">
+                {[
+                  "info@dbcolors.ng",
+                  "projects@dbcolors.ng",
+                  "events@dbcolors.ng"
+                ].map((email) => (
+                  <Link key={email} href={`mailto:${email}`} className="flex items-center gap-3 text-white/40 hover:text-white group transition-colors">
+                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                      <Mail size={14} />
+                    </div>
+                    <span className="text-sm font-bold tracking-tight">{email}</span>
+                  </Link>
+                ))}
+              </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-xl font-bold mb-4 italic text-white">Newsletter</h4>
+            <h4 className="text-sm font-black uppercase tracking-[0.3em] mb-6 text-primary">Newsletter</h4>
             <p className="text-white/40 mb-4 text-sm">Subscribe to receive the latest design tips and project updates.</p>
             <div className="relative">
               <input

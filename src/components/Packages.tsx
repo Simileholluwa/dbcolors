@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Check, X, ArrowRight, ShoppingCart } from "lucide-react";
 import SectionHeader from "./SectionHeader";
@@ -9,55 +9,55 @@ import SectionHeader from "./SectionHeader";
 const packages = [
   {
     id: 1,
-    name: "Luxe Living",
-    price: "$2,500",
-    description: "High-end residential living rooms with bespoke furniture and designer lighting.",
-    features: ["Custom Layout", "Premium Furniture", "Lighting Design", "Color Consultation"],
+    name: "Executive Parlour",
+    price: "₦3.5M",
+    description: "Transform your main parlour into a masterpiece with bespoke furniture and designer POP ceilings.",
+    features: ["POP Ceiling Design", "Screeding & Painting", "Custom Furniture", "Lighting Fixtures"],
     image: "/gallery/living-room.png",
     color: "bg-primary",
   },
   {
     id: 2,
-    name: "Zen Workspace",
-    price: "$1,800",
-    description: "Minimalist home and corporate offices designed for productivity and calm.",
-    features: ["Ergonomic Setup", "Acoustic Treatment", "Cable Management", "Custom Shelving"],
+    name: "Pro Home Office",
+    price: "₦1.8M",
+    description: "Build a productive workspace that survives any power cut. Inverter-ready and distraction-free.",
+    features: ["Inverter-Ready Setup", "Acoustic Padding", "Cable Management", "Ergonomic Desk"],
     image: "/gallery/office.png",
     color: "bg-zinc-200",
   },
   {
     id: 3,
-    name: "Urban Kitchen",
-    price: "$3,200",
-    description: "Modern culinary spaces with integrated appliances and sophisticated finishes.",
-    features: ["Cabinet Design", "Island Planning", "Appliance Selection", "Tile & Countertops"],
+    name: "Modern Island Kitchen",
+    price: "₦5.2M",
+    description: "Upgrade your kitchen with premium granite tops, heat extractors, and sophisticated cabinetry.",
+    features: ["Granite Countertops", "Heat Extractor", "Kitchen Island", "Smart Storage"],
     image: "/gallery/kitchen.png",
     color: "bg-primary",
   },
   {
     id: 4,
-    name: "Serene Suites",
-    price: "$2,200",
-    description: "Premium bedroom and bathroom designs focused on luxury and relaxation.",
-    features: ["Wardrobe Design", "En-suite Planning", "Textile Selection", "Mood Lighting"],
+    name: "Master Suite Haven",
+    price: "₦2.8M",
+    description: "The ultimate sanctuary. Featuring premium walk-in closets and luxury hotel-standard finishing.",
+    features: ["Walk-in Closet", "En-suite Design", "Mood Lighting", "Wall Stucco"],
     image: "/gallery/bedroom.png",
     color: "bg-zinc-200",
   },
   {
     id: 5,
-    name: "Executive Lounge",
-    price: "$4,500",
-    description: "Corporate hospitality and relaxation areas designed for high-level meetings.",
-    features: ["Bar Design", "Acoustic Panels", "Luxury Seating", "AV Integration"],
+    name: "Corporate VIP Lounge",
+    price: "₦7.5M",
+    description: "Create a world-class impression for your clients. High-end finishing for offices and private lounges.",
+    features: ["3D Wall Panels", "Luxury Seating", "AV Installation", "Mini Bar Setup"],
     image: "/gallery/office.png",
     color: "bg-primary",
   },
   {
     id: 6,
-    name: "Artisanal Atelier",
-    price: "$1,500",
-    description: "Creative studios and niche spaces tailored for artists and creators.",
-    features: ["Optimal Lighting", "Storage Solutions", "Workstation Design", "Color Grading"],
+    name: "Content Creator Hub",
+    price: "₦1.5M",
+    description: "The perfect setup for your brand. Professional lighting and aesthetic backgrounds for high-quality shoots.",
+    features: ["Ring Light Setup", "Dynamic Backdrops", "Sound Treatment", "Equipment Storage"],
     image: "/gallery/hero.png",
     color: "bg-zinc-200",
   },
@@ -73,9 +73,9 @@ const Packages = () => {
   return (
     <section className="py-16 md:py-24 bg-transparent relative z-10" id="packages">
       <div className="container mx-auto px-6">
-        <SectionHeader 
-          whiteText="Curated Design" 
-          highlightText="Packages" 
+        <SectionHeader
+          whiteText="Curated Design"
+          highlightText="Packages"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
