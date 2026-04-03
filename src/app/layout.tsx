@@ -153,7 +153,11 @@ export default function RootLayout({
                     if (now - lastReload > 10000) {
                       sessionStorage.setItem(reloadKey, now.toString());
                       console.warn('Deployment update detected. Reloading for newest version...');
-                      window.location.reload();
+                      
+                      // Use a cache-busting timestamp to bypass CDN caches
+                      const url = new URL(window.location.href);
+                      url.searchParams.set('v', now.toString());
+                      window.location.href = url.toString();
                     }
                   }
                 }
