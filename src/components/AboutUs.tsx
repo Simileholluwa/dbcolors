@@ -13,8 +13,8 @@ const AboutUs = () => {
       {/* Section Header */}
       <div className="container mx-auto lg:w-full px-6 relative">
         <SectionHeader
-          whiteText="The Archival"
-          highlightText="Heritage"
+          whiteText="Our Creative"
+          highlightText="Journey"
         />
 
         <div className="relative">

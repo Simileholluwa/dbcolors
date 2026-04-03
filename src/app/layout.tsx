@@ -135,12 +135,31 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.addEventListener('error', (e) => {
-                if (e.message && e.message.includes('ChunkLoadError')) {
-                  console.warn('Deployment update detected. Reloading for newest version...');
-                  window.location.reload();
+              (function() {
+                const reloadKey = 'next_chunk_reload';
+                function handleChunkError(e) {
+                  const message = e.message || (e.reason && e.reason.message) || "";
+                  const name = (e.error && e.error.name) || (e.reason && e.reason.name) || "";
+                  const isChunkLoadError = 
+                    message.includes('ChunkLoadError') || 
+                    message.includes('Loading chunk') || 
+                    message.includes('Failed to fetch') ||
+                    name === 'ChunkLoadError';
+
+                  if (isChunkLoadError) {
+                    const now = Date.now();
+                    const lastReload = parseInt(sessionStorage.getItem(reloadKey) || '0', 10);
+                    // Avoid infinite reload loops by limiting to once every 10s
+                    if (now - lastReload > 10000) {
+                      sessionStorage.setItem(reloadKey, now.toString());
+                      console.warn('Deployment update detected. Reloading for newest version...');
+                      window.location.reload();
+                    }
+                  }
                 }
-              }, true);
+                window.addEventListener('error', handleChunkError, true);
+                window.addEventListener('unhandledrejection', handleChunkError);
+              })();
             `,
           }}
         />

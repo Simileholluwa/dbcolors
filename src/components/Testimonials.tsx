@@ -63,8 +63,8 @@ const Testimonials = () => {
         <div className="max-w-4xl mx-auto">
           {/* Standardized Header */}
           <SectionHeader
-            whiteText="The Echo"
-            highlightText="Chamber"
+            whiteText="Client"
+            highlightText="Testimonials"
           />
 
           <div className="relative">
