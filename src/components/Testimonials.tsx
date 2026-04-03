@@ -13,7 +13,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Michael Chen",
+    name: "Michael Adewale",
     role: "CEO, Tech Hub",
     text: "The office design they provided perfectly balances professionalism with creative energy. Our team loves the new workspace!",
     rating: 5,
@@ -31,8 +31,8 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Elena Rodriguez",
-    role: "Modernist Architect",
+    name: "Chidinma Blessing",
+    role: "House Agent",
     text: "dbcolors understands the relationship between light, space, and texture. A true partner for high-end residential projects.",
     rating: 5,
   },

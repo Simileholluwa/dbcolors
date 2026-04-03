@@ -18,7 +18,7 @@ const packages = [
   },
   {
     id: 2,
-    name: "Pro Home Office",
+    name: "Office Space",
     price: "₦1.8M",
     description: "Build a productive workspace that survives any power cut. Inverter-ready and distraction-free.",
     features: ["Inverter-Ready Setup", "Acoustic Padding", "Cable Management", "Ergonomic Desk"],
@@ -27,7 +27,7 @@ const packages = [
   },
   {
     id: 3,
-    name: "Modern Island Kitchen",
+    name: "Modern Kitchen",
     price: "₦5.2M",
     description: "Upgrade your kitchen with premium granite tops, heat extractors, and sophisticated cabinetry.",
     features: ["Granite Countertops", "Heat Extractor", "Kitchen Island", "Smart Storage"],
@@ -45,20 +45,20 @@ const packages = [
   },
   {
     id: 5,
-    name: "Corporate VIP Lounge",
-    price: "₦7.5M",
-    description: "Create a world-class impression for your clients. High-end finishing for offices and private lounges.",
-    features: ["3D Wall Panels", "Luxury Seating", "AV Installation", "Mini Bar Setup"],
-    image: "/gallery/office.png",
+    name: "Boutique Showroom",
+    price: "₦9.5M",
+    description: "Exquisite retail and showroom designs that captivate. Premium display solutions with integrated smart lighting.",
+    features: ["Marble Display Plinths", "Integrated LED Shelving", "High-Traffic Porcelain", "Custom Signage Wall"],
+    image: "/gallery/boutique-showroom.png",
     color: "bg-primary",
   },
   {
     id: 6,
-    name: "Content Creator Hub",
-    price: "₦1.5M",
-    description: "The perfect setup for your brand. Professional lighting and aesthetic backgrounds for high-quality shoots.",
-    features: ["Ring Light Setup", "Dynamic Backdrops", "Sound Treatment", "Equipment Storage"],
-    image: "/gallery/hero.png",
+    name: "Wellness Studio",
+    price: "₦3.2M",
+    description: "A dedicated space for health and reflection. Soundproofed and climate-controlled for the ultimate yoga or gym experience.",
+    features: ["Acoustic Wall Panels", "Impact-Resistant Flooring", "Full-Length Mirror Wall", "Smart Climate Control"],
+    image: "/gallery/home-wellness-studio.png",
     color: "bg-zinc-200",
   },
 ];
@@ -94,7 +94,7 @@ const Packages = () => {
                 <div className="absolute inset-0 [backface-visibility:hidden] h-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] overflow-hidden backdrop-blur-2xl group-hover:border-primary/40 transition-colors duration-500 p-4 flex flex-col shadow-2xl">
                   <div className="relative w-full h-64 rounded-xl overflow-hidden mb-8">
                     <Image src={pkg.image} alt={pkg.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-secondary/30 group-hover:bg-transparent transition-colors duration-500" />
+                    <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
 
                   <div className="flex justify-between items-start mb-4">
