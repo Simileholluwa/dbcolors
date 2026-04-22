@@ -61,14 +61,14 @@ const ConsultationView = () => {
       const fetchAndSet = async () => {
         setIsUpdating(true);
         const result = await getBooking(updateId);
-        if (result && result.success && result.booking) {
-          setExistingBooking(result.booking);
+        if (result && result.success && result.data) {
+          setExistingBooking(result.data);
           setAssets(prev => ({
             ...prev,
-            email: result.booking.email,
-            name: result.booking.name
+            email: result.data.email,
+            name: result.data.name
           }));
-          setSelectedPackage({ name: result.booking.package });
+          setSelectedPackage(null);
           setStep(4);
         } else {
           setError("Could not find the booking to update.");
@@ -109,7 +109,6 @@ const ConsultationView = () => {
           hangoutLink: existingBooking.hangoutLink || "",
           email: assets.email,
           name: assets.name,
-          packageName: selectedPackage.name,
         };
         setBookingData(finalBooking);
         setStep(5);

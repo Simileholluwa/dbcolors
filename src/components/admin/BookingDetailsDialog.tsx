@@ -36,9 +36,6 @@ export const BookingDetailsDialog = ({ booking, onClose, onDelete }: BookingDeta
           <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-4 py-1.5 bg-primary text-secondary text-[10px] font-black uppercase tracking-[0.2em] rounded-lg">
-                  {booking.package}
-                </span>
               </div>
 
               <div>

@@ -1,6 +1,6 @@
 import React from "react";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "@/lib/firebase";
+import { api } from "@/lib/api";
+import { auth } from "@/lib/firebase";
 
 interface BookingParams {
   assets: {
@@ -38,8 +38,7 @@ export const useConsultationBooking = () => {
     const { assets, selectedPackage } = params;
 
     try {
-      // 1. Get Signed Upload URLs via Cloud Function
-      const getSignedUploadUrls = httpsCallable(functions, "getSignedUploadUrls");
+      // 1. Get Signed Upload URLs via API
       const filesToUpload: any[] = [];
       const fileMap: { [key: string]: File } = {};
 
@@ -68,16 +67,16 @@ export const useConsultationBooking = () => {
         throw new Error("No assets selected for upload.");
       }
 
-      const urlResponse: any = await getSignedUploadUrls({
+      const urlResponse: any = await api.post("/storage/signed-upload-urls", {
         email: assets.email,
         files: filesToUpload,
       });
 
-      if (!urlResponse.data.success) {
+      if (!urlResponse.success) {
         throw new Error("Failed to secure upload channels. Please try again.");
       }
 
-      const { uploads } = urlResponse.data;
+      const { uploads } = urlResponse;
       const assetPaths: any = { photos: [] };
 
       // 2. Upload files directly to Storage via Signed URLs (PUT)
@@ -97,38 +96,31 @@ export const useConsultationBooking = () => {
         }
 
         if (upload.storagePath.includes('/photos/')) {
-          assetPaths.photos.push(upload.storagePath);
+          assetPaths.photos.push(upload.publicUrl);
         } else if (upload.id.startsWith('drawing-')) {
-          assetPaths.drawing = upload.storagePath;
+          assetPaths.drawing = upload.publicUrl;
         } else if (upload.id.startsWith('layout-')) {
-          assetPaths.layout = upload.storagePath;
+          assetPaths.layout = upload.publicUrl;
         }
       }
 
-      // 3. Call createBooking Cloud Function
-      const createBooking = httpsCallable(functions, "createBooking");
-      const result: any = await createBooking({
+      const result: any = await api.post("/consultations/book", {
         email: assets.email,
         name: assets.name,
-        selectedPackage: {
-          name: selectedPackage.name,
-          price: selectedPackage.price,
-        },
         date: isoDate,
         time: timeStr,
         preferences: assets.preferences,
         assets: assetPaths,
       });
 
-      if (result.data.success) {
+      if (result.success) {
         const finalBooking = {
           date: displayDate,
           isoDate: isoDate,
           time: timeStr,
-          hangoutLink: result.data.hangoutLink,
+          hangoutLink: result.hangout_link,
           email: assets.email,
           name: assets.name,
-          packageName: selectedPackage.name,
         };
         setBookingData(finalBooking);
         return { success: true, data: finalBooking };
@@ -157,9 +149,8 @@ export const useConsultationBooking = () => {
 
   const checkExistingBooking = React.useCallback(async (email: string) => {
     try {
-      const checkFn = httpsCallable(functions, "checkExistingBooking");
-      const result: any = await checkFn({ email });
-      return result.data;
+      const result: any = await api.get(`/consultations/check-existing?email=${email}`);
+      return result;
     } catch (err: any) {
       console.error("Check existing booking error:", err);
       return { exists: false, error: err.message };
@@ -169,9 +160,8 @@ export const useConsultationBooking = () => {
   const deleteBooking = React.useCallback(async (docId: string) => {
     setIsBooking(true);
     try {
-      const deleteFn = httpsCallable(functions, "deleteBooking");
-      const result: any = await deleteFn({ docId });
-      return result.data;
+      const result: any = await api.delete(`/consultations/${docId}`);
+      return result;
     } catch (err: any) {
       console.error("Delete booking error:", err);
       return { success: false, error: err.message };
@@ -183,9 +173,11 @@ export const useConsultationBooking = () => {
   const updateBooking = React.useCallback(async (oldDocId: string, newDate: string, newTime: string) => {
     setIsBooking(true);
     try {
-      const updateFn = httpsCallable(functions, "updateBooking");
-      const result: any = await updateFn({ oldDocId, newDate, newTime });
-      return result.data;
+      const result: any = await api.put(`/consultations/${oldDocId}`, {
+        date: newDate,
+        time: newTime
+      });
+      return result;
     } catch (err: any) {
       console.error("Update booking error:", err);
       return { success: false, error: err.message };
@@ -196,9 +188,8 @@ export const useConsultationBooking = () => {
 
   const getBooking = React.useCallback(async (docId: string) => {
     try {
-      const getFn = httpsCallable(functions, "getBooking");
-      const result: any = await getFn({ docId });
-      return result.data;
+      const result: any = await api.get(`/consultations/${docId}`);
+      return result;
     } catch (err: any) {
       console.error("Get booking error:", err);
       return { success: false, error: err.message };

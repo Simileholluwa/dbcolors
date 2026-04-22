@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 interface BookingCardProps {
   booking: {
     id: string;
-    package: string;
     date: string;
     time: string;
   };
@@ -29,10 +28,6 @@ const BookingCard: React.FC<BookingCardProps> = ({
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8">
         <div className="space-y-4 w-full md:w-auto">
           <div className="flex flex-wrap items-center gap-2 md:gap-3">
-            <span className="bg-primary/20 text-primary text-[9px] md:text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest border border-primary/10">
-              {booking.package}
-            </span>
-            <span className="hidden md:inline text-white/20 text-[10px] uppercase font-black tracking-widest">•</span>
             <span className="text-white/40 text-[9px] md:text-[10px] uppercase font-black tracking-widest">
               ID: {booking.id.split('_').slice(0, 2).join(' ')}
             </span>

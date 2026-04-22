@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "@/lib/firebase";
+import { api } from "@/lib/api";
 import { useAdminAuth } from "@/context/AdminAuthContext";
 
 export interface Booking {
@@ -9,7 +8,6 @@ export interface Booking {
   email: string;
   date: string;
   time: string;
-  package: string;
   preferences?: string;
   hangoutLink?: string;
   startDateTime?: string;
@@ -31,13 +29,8 @@ export const useAdminBookings = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const getAllBookingsFn = httpsCallable(functions, "getAllBookings");
-      const result: any = await getAllBookingsFn();
-      if (result.data.success) {
-        setBookings(result.data.bookings as Booking[]);
-      } else {
-        throw new Error(result.data.error || "Failed to fetch bookings");
-      }
+      const result: any = await api.get("/consultations/admin/all", true);
+      setBookings(result.bookings as Booking[]);
     } catch (err: any) {
       console.error("Fetch error:", err);
       setError(err.message);
@@ -60,11 +53,10 @@ export const useAdminBookings = () => {
     }
 
     try {
-      const deleteFn = httpsCallable(functions, "deleteBooking");
-      const result: any = await deleteFn({ docId });
+      const result: any = await api.delete(`/consultations/admin/${docId}`, true);
 
-      if (!result.data.success) {
-        throw new Error(result.data.error || "Failed to delete booking");
+      if (!result.success) {
+        throw new Error(result.error || "Failed to delete booking");
       }
 
       return { success: true };

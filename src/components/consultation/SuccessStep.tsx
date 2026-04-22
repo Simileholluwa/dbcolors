@@ -9,7 +9,6 @@ interface SuccessStepProps {
     time: string;
     hangoutLink: string;
     email: string;
-    packageName: string;
   };
   wasUpdate?: boolean;
 }
@@ -33,7 +32,7 @@ const SuccessStep: React.FC<SuccessStepProps> = ({
 
       const details = `Consultation for ${bookingData.email}\n\nMeeting Link: ${bookingData.hangoutLink}`;
 
-      return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Dignified Brand Colors: ${bookingData.packageName}`)}&dates=${formatGCalDate(startTime)}/${formatGCalDate(endTime)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(bookingData.hangoutLink)}`;
+      return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Dignified Brand Colors: Consultation`)}&dates=${formatGCalDate(startTime)}/${formatGCalDate(endTime)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(bookingData.hangoutLink)}`;
     } catch (e) {
       return "#";
     }
@@ -55,7 +54,7 @@ const SuccessStep: React.FC<SuccessStepProps> = ({
         </span>
       </h2>
       <p className="text-white/60 text-lg font-medium leading-relaxed mb-6 max-w-md mx-auto italic">
-        Thank you! Your {bookingData.packageName} consultation is scheduled for{" "}
+        Thank you! Your consultation is scheduled for{" "}
         <span className="text-white font-bold">{bookingData.date}</span> at{" "}
         <span className="text-white font-bold">{bookingData.time}</span>.
       </p>

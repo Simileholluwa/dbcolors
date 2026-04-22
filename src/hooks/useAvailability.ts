@@ -1,6 +1,5 @@
 import React from "react";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "@/lib/firebase";
+import { api } from "@/lib/api";
 
 export const useAvailability = (initialMonth: number, initialYear: string) => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -17,10 +16,9 @@ export const useAvailability = (initialMonth: number, initialYear: string) => {
   const fetchMonthlyAvailability = React.useCallback(async (y: string, m: number, retry = true) => {
     setIsLoading(true);
     try {
-      const getMonthlyAvailability = httpsCallable(functions, "getMonthlyAvailability");
-      const result: any = await getMonthlyAvailability({ year: y, month: m });
+      const result: any = await api.get(`/consultations/availability/monthly?year=${y}&month=${m}`);
       
-      const available = result.data.availableDays || [];
+      const available = result.available_days || [];
       
       const now = new Date();
       const isCurrentMonth = parseInt(y) === now.getFullYear() && m === (now.getMonth() + 1);
@@ -52,15 +50,11 @@ export const useAvailability = (initialMonth: number, initialYear: string) => {
   const fetchDaySlots = React.useCallback(async (day: number) => {
     setIsLoadingTimes(true);
     try {
-      const getAvailableSlots = httpsCallable(functions, "getAvailableSlots");
-      const result: any = await getAvailableSlots({
-        year: monthData.year,
-        month: monthData.monthNum,
-        day
-      });
+      const dateStr = `${monthData.year}-${String(monthData.monthNum).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const result: any = await api.get(`/consultations/availability/slots?date=${dateStr}`);
 
-      if (result.data.availableSlots) {
-        setAvailableTimes(result.data.availableSlots);
+      if (result.available_slots) {
+        setAvailableTimes(result.available_slots);
       }
     } catch (error) {
       console.warn('Failed to fetch daily slots:', error);

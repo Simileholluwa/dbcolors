@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithCustomToken } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { api } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock, Mail, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -19,11 +20,23 @@ const AdminLoginPage = () => {
     setIsLoading(true);
     setError(null);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/admin/bookings");
+      // 1. Call backend to verify credentials and check admin role
+      const response: any = await api.post("/auth/admin/login", {
+        email,
+        password,
+      });
+
+      if (response.status === "success" && response.custom_token) {
+        // 2. Sign in to Firebase SDK using the custom token provided by the backend
+        await signInWithCustomToken(auth, response.custom_token);
+        
+        router.push("/admin/bookings");
+      } else {
+        throw new Error(response.detail || "Authentication failed.");
+      }
     } catch (err: any) {
       console.error("Login error:", err);
-      setError("Invalid credentials. Please try again.");
+      setError(err.message || "Invalid credentials or insufficient permissions.");
     } finally {
       setIsLoading(false);
     }
