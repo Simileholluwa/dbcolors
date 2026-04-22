@@ -85,12 +85,7 @@ const AdminBookingsPage = () => {
                         <Calendar className="text-white/20" size={12} />
                         <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{booking.date}</span>
                       </div>
-                      <div className="flex items-center gap-1.5">
-                        <Package className="text-white/20" size={12} />
-                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest truncate max-w-[150px]">{booking.package}</span>
-                      </div>
                     </div>
-                    <span className="md:hidden text-[8px] font-black text-primary uppercase tracking-[0.2em]">{booking.package}</span>
                   </div>
 
                   <div className="flex items-center gap-4">
